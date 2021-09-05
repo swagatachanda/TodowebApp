@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+li{
+    list-style: none;
+    text-decoration: none;
+}
+.button:hover{
+    cursor: pointer;
+    color: brown;
+}
+.login-container >  div{
+    padding: 15px;
+}
+input{
+    border-radius: 5px;
+    height: 30px;
+    width: 50%;
+    font-size: 20px;
+    margin-top: 15px;
+}
+.label{
+    font-size: 25px;
+    font-family: 'Raleway', sans-serif;
+    color: rgb(45, 45, 240);
+}
