@@ -3,6 +3,7 @@ require("mongoose-type-url")
 const todolist = mongoose.Schema({
 	userId:{
         type: mongoose.Types.ObjectId,
+        required: true
     },
     // todoname: {
 	// 	type: String,
@@ -16,6 +17,9 @@ const todolist = mongoose.Schema({
     },
     edit:{
         type: String
+    },
+    photoUrl:{
+        type: mongoose.SchemaTypes.Url
     }
 })
 module.exports = mongoose.model("todolist", todolist)

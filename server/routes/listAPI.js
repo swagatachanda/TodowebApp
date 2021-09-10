@@ -2,7 +2,64 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const List = require('../models/todolist')
+const aws = require('aws-sdk')
+const multer = require('multer')
+const { v4: uuidv4 } = require('uuid');
 router.use(express.json())
+
+require('dotenv').config()
+
+
+const storage = multer.memoryStorage({
+    destination: function(req,file,callback){
+        callback(null,"")
+    }
+})
+
+const s3 = new aws.S3({
+    accessKeyId: process.env.AWS_ID,
+    secretAccessKey: process.env.AWS_SECRET
+})
+
+const upload = multer({storage}).single("image") //'image' parameter should be same as the the postman parameter name ->  body->form-data
+
+
+router.post("/upload/:listid", upload, (req,res)=>{
+    const filename = req.file.originalname.split(".")
+    const filetype = filename[filename.length-1]
+    console.log(req.file)
+    const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `${uuidv4()}.${filetype}`,
+        Body: req.file.buffer,
+        ACL: "public-read"
+    }
+    s3.upload(params, async(error,data)=>{
+        if(error){
+            res.status(505).send(error)
+        }
+        try{
+            const updateList = await List.updateOne(
+                { _id: req.params.listid },
+                { $set: {photoUrl: data.Location} }
+            )
+            if (updateList.nModified <= 0) {
+                return res.status(404).json({
+                    error: 'member could not be updated',
+                    errorOccured: 'error',
+                })
+            }
+            res.status(200).send(data)
+        }
+        catch (err) {
+            return res.status(500).json({
+                error: 'database unresponsive2',
+                errorMessage: err,
+                errorOccured: 'database',
+            })
+        }
+    })
+})
 
 
 router.post("/new", async (req, res) => {
