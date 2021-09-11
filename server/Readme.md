@@ -18,3 +18,5 @@ delete: note/delete/:listid - for deleting a particular list
 
 get: api/user/:userid - for getting user details
 
+post: note/upload - for uploading images
+
