@@ -38,6 +38,10 @@ class Page extends React.Component{
 
 
     async uploadpic(e){
+        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+            window.location.assign('/')
+          }
+          else{
         try {
             const formdata = new FormData();
             formdata.append("image", this.state.image);
@@ -50,18 +54,14 @@ class Page extends React.Component{
             })
             .then((Response)=>Response.json())
             .then((back)=>{
-                // var datapic={}
-                // datapic.data=back.Location
-                // this.setState({
-                //     image: datapic.data
-                // })
-                // console.log(datapic.data)
                 console.log(back)
+                window.location.assign('/mypage')
             })
     }
     catch(err){
         console.log(err)
     }
+}
 }
 
 
@@ -276,7 +276,11 @@ class Page extends React.Component{
                                     <input type='file' accept='image/*' className='upload' id={item._id} onChange={this.onselectfile}></input>
                                     </div>
                                     <div>
-                                        {/* {this.state.image} */}
+                                        {item.photoUrl.map((photos)=>{
+                                            return(
+                                                <img src={photos} alt='avatar' style={{width:'30px', height:'30px'}}></img>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             </div>
