@@ -44,7 +44,7 @@ class Page extends React.Component{
       
             // showBackdrop();
       
-            const res = await fetch(`http://localhost:5000/note/upload/${e.currentTarget.id}`, {
+            const res = await fetch(`/note/upload/${e.currentTarget.id}`, {
               method: "POST",
               body: formdata,
             })
