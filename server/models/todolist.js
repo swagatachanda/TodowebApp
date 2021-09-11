@@ -19,7 +19,7 @@ const todolist = mongoose.Schema({
         type: String
     },
     photoUrl:{
-        type: mongoose.SchemaTypes.Url
+        type: [mongoose.SchemaTypes.Url]
     }
 })
 module.exports = mongoose.model("todolist", todolist)

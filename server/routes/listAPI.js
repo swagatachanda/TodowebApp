@@ -38,22 +38,25 @@ router.post("/upload/:listid", upload, (req,res)=>{
         if(error){
             res.status(505).send(error)
         }
-        try{
-            const updateList = await List.updateOne(
-                { _id: req.params.listid },
-                { $set: {photoUrl: data.Location} }
-            )
-            if (updateList.nModified <= 0) {
+        try {
+            const searchList = await List.findById(req.params.listid)
+            console.log(searchList)
+            if (searchList === null) {
                 return res.status(404).json({
-                    error: 'member could not be updated',
-                    errorOccured: 'error',
+                    error: 'List not found',
+                    errorOccured: 'list',
                 })
             }
+            searchList.photoUrl.push(data.Location)
+            const updateList = await List.updateOne(
+                { _id: req.params.listid },
+                { $set: searchList }
+            )
+            console.log(updateList)
             res.status(200).send(data)
-        }
-        catch (err) {
+        } catch (err) {
             return res.status(500).json({
-                error: 'database unresponsive2',
+                error: 'database unresponsive1',
                 errorMessage: err,
                 errorOccured: 'database',
             })

@@ -4,6 +4,8 @@ import React from 'react';
 import './profile.css'
 import EdiText from 'react-editext'
 
+import Button from '@material-ui/core/Button'
+
 
 
 class Page extends React.Component{
@@ -19,6 +21,7 @@ class Page extends React.Component{
           details: [],
           id:'',
           userdetails: {},
+          image: null
       }
     
       this.add=this.add.bind(this)
@@ -28,7 +31,54 @@ class Page extends React.Component{
       this.logout = this.logout.bind(this)
       this.onsave = this.onsave.bind(this)
       this.setid = this.setid.bind(this)
+      this.onselectfile = this.onselectfile.bind(this)
+      this.uploadpic = this.uploadpic.bind(this)
+    //   this.inputRef = React.useRef()
     };
+
+
+    async uploadpic(e){
+        try {
+            const formdata = new FormData();
+            formdata.append("image", this.state.image);
+      
+            // showBackdrop();
+      
+            const res = await fetch(`http://localhost:5000/note/upload/${e.currentTarget.id}`, {
+              method: "POST",
+              body: formdata,
+            })
+            .then((Response)=>Response.json())
+            .then((back)=>{
+                // var datapic={}
+                // datapic.data=back.Location
+                // this.setState({
+                //     image: datapic.data
+                // })
+                // console.log(datapic.data)
+                console.log(back)
+            })
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+
+    onselectfile(event){
+        console.log(event.target.files[0])
+        this.setState({
+            image: event.target.files[0]
+        })
+        // if(event.target.files && event.target.files.length > 0){
+        //     const reader = new FileReader()
+        //     reader.readAsDataURL(event.target.files[0])
+        //     reader.addEventListener('load',()=>{
+        //         // console.log(reader.result)
+        //         this.setState({image: reader.result})
+        //     })
+        // }
+    }
 
     setid(e){
         console.log(e.currentTarget.id)
@@ -190,6 +240,10 @@ class Page extends React.Component{
     render(){
         const {details} = this.state
         const {userdetails} = this.state
+        // const inputRef = React.useRef()
+        // const triggerpopup=()=>{
+        //     inputRef.current.click()
+        // }
         return(
             <div>
                 <div className='add'>
@@ -218,7 +272,16 @@ class Page extends React.Component{
                                     <div className='content' id={item._id} onMouseEnter={this.setid}>
                                         <EdiText id={item._id} type='text' value={item.content} onSave={this.onsave}></EdiText>
                                     </div>
+                                    <div className='image-set'>
+                                    <input type='file' accept='image/*' className='upload' id={item._id} onChange={this.onselectfile}></input>
+                                    </div>
+                                    <div>
+                                        {/* {this.state.image} */}
+                                    </div>
                                 </div>
+                            </div>
+                            <div className='image-upload'>
+                            <Button id={item._id} onClick={this.uploadpic}>Upload</Button>
                             </div>
                             <div className='modify'>
                             <div className='delete-item' id={item._id} onClick={this.deleteelem}>-</div>

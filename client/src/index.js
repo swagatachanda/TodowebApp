@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
+// import RenderSnackbar from '../src/components/screens/Profile/snackbar/snackbar'
+// import SimpleBackdrop from '../src/components/screens/Profile/backdrop/backdrop'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
