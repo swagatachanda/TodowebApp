@@ -20,3 +20,5 @@ get: api/user/:userid - for getting user details
 
 post: note/upload/:listid - for uploading images
 
+delete: note/deletephoto/:name - for deleting images
+

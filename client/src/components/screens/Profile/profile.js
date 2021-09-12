@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import DeleteIcon from '@material-ui/icons/Delete';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
 
 
@@ -31,6 +32,7 @@ class Page extends React.Component{
       this.onselectfile = this.onselectfile.bind(this)
       this.uploadpic = this.uploadpic.bind(this)
       this.triggerpopup = this.triggerpopup.bind(this)
+      this.deleteobj = this.deleteobj.bind(this)
     };
 
     triggerpopup(e){
@@ -39,6 +41,42 @@ class Page extends React.Component{
             id: e.currentTarget.id
         })
         console.log(e.currentTarget.id)
+    }
+
+
+    async deleteobj(e){
+        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+            window.location.assign('/')
+          }
+          else{
+
+            const url = `/note/deletephoto/${e.currentTarget.id}`
+            console.log(url)
+            await fetch(url,{
+                method: 'DELETE',
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+            .then((Response)=>Response.text())
+            
+
+            var data={
+                edit: 'Last updated on'
+            }
+
+            const uri = `/note/update/${this.state.id}`
+            await fetch(uri,{
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+            }).then((Response)=>Response.json())
+            .then((back)=>{
+                window.location.assign("/mypage")
+            })
+          }
     }
 
 
@@ -292,10 +330,13 @@ class Page extends React.Component{
                                     <input type='file' accept='image/*' className='upload' onChange={this.onselectfile} ref='InputField'></input>
                                     </div>
                                     <div className='list'>
-                                        <div>
+                                        <div id={item._id} onClick={this.setid}>
                                         {item.photoUrl.map((photos)=>{
                                             return(
+                                                <div>
                                                 <img src={photos} alt='avatar' style={{width:'85px', height:'85px'}}></img>
+                                                <RemoveCircleOutlineIcon onClick={this.deleteobj} id={photos.split('/').slice(-1)[0]} style={{cursor: 'pointer'}}></RemoveCircleOutlineIcon>
+                                                </div>
                                             )
                                         })}
                                         </div>

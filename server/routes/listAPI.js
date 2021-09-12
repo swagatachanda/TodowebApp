@@ -65,6 +65,54 @@ router.post("/upload/:listid", upload, (req,res)=>{
 })
 
 
+router.delete(`/deletephoto/:name`, async(req,res)=>{
+    var q={}
+    var names=[]
+    names.push(new RegExp(req.params.name))
+    q.photoUrl = {'$in': names}
+    const searchList = await List.findOne(q)
+    if (searchList === null) {
+        return res.status(404).json({
+            error: 'List not found',
+            errorOccured: 'list',
+        })
+    }
+    const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `${req.params.name}`,
+    }
+    s3.deleteObject(params, async(error, data)=>{
+    if(error){
+        res.status(505).send(error)
+    }
+    try{
+        var index
+        searchList.photoUrl.map((item)=>{
+        if(item.split('/').slice(-1)[0]==req.params.name){
+            index = searchList.photoUrl.indexOf(item)
+        }
+    })
+        if (index > -1) {
+            searchList.photoUrl.splice(index, 1)
+        }
+        const updateList = await List.updateOne(
+            { _id: searchList._id },
+            { $set: {photoUrl: searchList.photoUrl} }
+        )
+        
+        res.status(200).send("Data deleted")
+    }
+    catch(err){
+        return res.status(500).json({
+            error: 'database unresponsive1',
+            errorMessage: err,
+            errorOccured: 'database',
+        })
+    }
+    })
+})
+
+
 router.post("/new", async (req, res) => {
 	const data = {}
 	const validFields = ["userId", "todoname", "content", "dot", "edit"]
