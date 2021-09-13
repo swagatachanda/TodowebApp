@@ -7,6 +7,7 @@ import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import DeleteIcon from '@material-ui/icons/Delete';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 
 
@@ -298,7 +299,7 @@ class Page extends React.Component{
             <div>
                 <div className='add'>
                 <input type='text' placeholder='Add your note' onChange={this.setname} onKeyUp={this.handleEnter}></input>
-                <div className='plus' onClick={this.add}>+</div>
+                <AddCircleOutlineIcon className='plus' onClick={this.add}></AddCircleOutlineIcon>
                 <div className='align'>
                 <div className='attr' onMouseEnter={()=>{document.querySelector('.logout').style.display='block'}} onMouseLeave={()=>{document.querySelector('.logout').style.display='none'}}>
                 <div className='username'>{userdetails.email}</div>
