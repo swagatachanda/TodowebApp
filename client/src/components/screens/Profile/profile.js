@@ -8,10 +8,13 @@ import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import DeleteIcon from '@material-ui/icons/Delete';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { BackdropContext } from '../../screeneffect/backdrop/backdrop'
 
 
 
 class Page extends React.Component{
+    static contextType = BackdropContext
+
     constructor(props) {
       super(props)
 
@@ -50,7 +53,7 @@ class Page extends React.Component{
             window.location.assign('/')
           }
           else{
-
+            this.context.handleToggle()
             const url = `/note/deletephoto/${e.currentTarget.id}`
             console.log(url)
             await fetch(url,{
@@ -87,6 +90,7 @@ class Page extends React.Component{
           }
           else{
         try {
+            this.context.handleToggle()
             const url = `/note/update/${this.state.id}`
             console.log(url)
             var data={
@@ -169,6 +173,7 @@ class Page extends React.Component{
             window.location.assign('/')
           }
           else{
+            this.context.handleToggle()
         const url = `/note/delete/${e.currentTarget.id}`
         console.log(url)
         await fetch(url,{
@@ -193,6 +198,7 @@ class Page extends React.Component{
             window.location.assign('/')
           }
           else{
+            this.context.handleToggle()
         const id = localStorage.getItem('data')
         var data={
             userId : id,
@@ -267,6 +273,7 @@ class Page extends React.Component{
             window.location.assign('/')
           }
           else{
+            this.context.handleToggle()
         console.log(this.state.id)
         const url = `/note/update/${this.state.id}`
         console.log(url)
@@ -292,11 +299,15 @@ class Page extends React.Component{
     }
     }
     
+   
     render(){
         const {details} = this.state
         const {userdetails} = this.state
+        
         return(
             <div>
+                {/* <BackdropContext.Consumer> */}
+                
                 <div className='add'>
                 <input type='text' placeholder='Add your note' onChange={this.setname} onKeyUp={this.handleEnter}></input>
                 <AddCircleOutlineIcon className='plus' onClick={this.add}></AddCircleOutlineIcon>
