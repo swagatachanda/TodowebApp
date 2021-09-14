@@ -81,3 +81,6 @@ img{
     padding-left: 20px;
     padding-top: 20px
 }
+.file-remove:hover{
+    color: red
+}
