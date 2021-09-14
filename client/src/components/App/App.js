@@ -45,9 +45,9 @@ class App extends React.Component{
       </Switch>
       </BrowserRouter>
       </div>
-      <div className='App__Form'>
+      {/* <div className='App__Form'>
           <h1>Welcome to My Note</h1>
-      </div>
+      </div> */}
       </div>
     )
   }

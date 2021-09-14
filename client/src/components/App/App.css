@@ -14,20 +14,20 @@ height: 100%;
 }
 
 .App__Aside{
-  width: 50%;
+  width: 100%;
   /* background-color: #66DAC7; */
 }
-.App__Form{
-  width: 50%;
-  /* background-color: #2E4158; */
+/* .App__Form{
+  width: 100%;
+  background-color: #2E4158;
   padding: 25px 40px;
   height: auto;
-  /* overflow: auto; */
+  overflow: auto;
   background-image: url('../images/stickynotes.png');
   background-size: cover;
     background-position: center;
     background-repeat: repeat-y;
-}
+} */
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Fredoka+One&display=swap');
 h1{
   font-family: 'Fredoka One', cursive;
