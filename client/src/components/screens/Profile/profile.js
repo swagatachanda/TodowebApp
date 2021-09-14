@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { BackdropContext } from '../../screeneffect/backdrop/backdrop'
+import CancelIcon from '@material-ui/icons/Cancel';
 
 
 
@@ -37,6 +38,7 @@ class Page extends React.Component{
       this.uploadpic = this.uploadpic.bind(this)
       this.triggerpopup = this.triggerpopup.bind(this)
       this.deleteobj = this.deleteobj.bind(this)
+      this.removefile = this.removefile.bind(this)
     };
 
     triggerpopup(e){
@@ -47,6 +49,12 @@ class Page extends React.Component{
         console.log(e.currentTarget.id)
     }
 
+
+    removefile(){
+            this.refs.filestore.style.display = 'none'
+            this.refs.upload.style.display = 'none'
+            this.refs.icon.style.display = 'none'
+    }
 
     async deleteobj(e){
         if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
@@ -135,9 +143,8 @@ class Page extends React.Component{
         if(event.target.files && event.target.files.length > 0){
             this.refs.icon.style.display = 'block'
             this.refs.upload.style.display = 'block'
-        }
-        else{
-
+            this.refs.filestore.style.display = 'block'
+            this.refs.filestore.style.cursor = 'pointer'
         }
     }
 
@@ -319,6 +326,7 @@ class Page extends React.Component{
                 </div>
                 </div>
                 <div className='image-upload'>
+                    <CancelIcon onClick={this.removefile} ref='filestore' style={{display: 'none'}} className='file-remove'></CancelIcon>
                      <InsertPhotoIcon ref='icon' style={{display: 'none'}}></InsertPhotoIcon>
                     <Button onClick={this.uploadpic} ref='upload' style={{display: 'none'}}>Upload</Button>
                 </div>
