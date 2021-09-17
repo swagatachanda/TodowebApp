@@ -3,10 +3,7 @@ import './login.css'
 import { mailformat } from '../Signup/regex';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Page from '../Profile/profile';
-
-// import ReactDOM from 'react-dom';
-// import Page from '../Profile/profile';
-
+import Navbar from '../../Navbar/navbar';
 
 class Profile extends React.Component{
 
@@ -24,11 +21,16 @@ class Profile extends React.Component{
         this.validemail = this.validemail.bind(this)
         this.login = this.login.bind(this)
         this.change = this.change.bind(this)
-  
+        this.signup = this.signup.bind(this)
   
       };
 
       
+
+      signup(){
+
+      }
+
 
       validemail(email){
         this.setState({
@@ -53,9 +55,7 @@ class Profile extends React.Component{
     }
 
       async login(term){
-        // const changevalue=()=>{
-        //     this.props.data.push(this.state.data)
-        // }
+      
         var data={
             email : this.state.Email,
             password : this.state.password
@@ -82,14 +82,16 @@ class Profile extends React.Component{
                 if(back.status)
                 {
                     console.log(back.logged.cookie.expires)
-                    // console.log(new Date(back.logged.cookie.expires).toLocaleString())
-                    // new Date(item.dot).toLocaleString()
+       
                     localStorage.setItem('data',back.data._id)
                     localStorage.setItem('logged', back.logged.islogged)
                     localStorage.setItem('expiry', back.logged.cookie.expires)
-                        
-                        
-                        window.location.assign(`/mypage`)
+                    const url = `/note/all/${localStorage.getItem('data')}`
+                    localStorage.setItem('url', url)
+
+                    
+                    
+                    window.location.assign(`/mypage`)
                         
                
                 
@@ -109,14 +111,7 @@ class Profile extends React.Component{
     render(){
         return(
             <div className='content-container'>
-                {/* <BrowserRouter>
-                    <Switch>
-                        <Route exact path='/mypage'>
-                            <Page data={this.props.data}/>
-                        </Route>
-                    </Switch>
-                    </BrowserRouter> */}
-                    {/* <Page data={this.props.data}/> */}
+               
                 <div className='login-container'>
                 <div className='username'>
                         <div className='label'>
@@ -146,6 +141,11 @@ class Profile extends React.Component{
                             <div className='button-label'>
                                 Login
                             </div>
+                        </div>
+                        <div className="button login" onClick={this.signup}>
+                            <a href="/signup" className='button-label'>
+                                Create an Account
+                            </a>
                         </div>
                     </div>
                     </div>

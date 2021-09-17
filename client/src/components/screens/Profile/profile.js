@@ -10,7 +10,11 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { BackdropContext } from '../../screeneffect/backdrop/backdrop'
 import CancelIcon from '@material-ui/icons/Cancel';
-
+import Navbar from '../../Navbar/navbar'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Sidetoggle from '../../Navbar/hamburger/hamburger'
+import Backdropclose from '../../screeneffect/backdrop/backdropclose';
+import Searchbar from '../../searchbar/searchbar'
 
 
 class Page extends React.Component{
@@ -24,13 +28,13 @@ class Page extends React.Component{
           details: [],
           id:'',
           userdetails: {},
-          image: null
+          image: null,
+          sidebaropen: false
       }
     
       this.add=this.add.bind(this)
       this.setname = this.setname.bind(this)
       this.deleteelem = this.deleteelem.bind(this)
-      this.handleEnter=this.handleEnter.bind(this)
       this.logout = this.logout.bind(this)
       this.onsave = this.onsave.bind(this)
       this.setid = this.setid.bind(this)
@@ -39,7 +43,21 @@ class Page extends React.Component{
       this.triggerpopup = this.triggerpopup.bind(this)
       this.deleteobj = this.deleteobj.bind(this)
       this.removefile = this.removefile.bind(this)
+      this.opensidebar = this.opensidebar.bind(this)
+      this.backdropclose = this.backdropclose.bind(this)
     };
+
+    backdropclose(){
+        this.setState({
+            sidebaropen: false
+        })
+    }
+
+    opensidebar(){
+        this.setState((prevState)=>{
+          return {sidebaropen: !prevState.sidebaropen}
+        })
+      }
 
     triggerpopup(e){
         this.refs.InputField.click()
@@ -114,9 +132,6 @@ class Page extends React.Component{
 
             const formdata = new FormData();
             formdata.append("image", this.state.image);
-      
-            // showBackdrop();
-      
             const res = await fetch(`/note/upload/${this.state.id}`, {
               method: "POST",
               body: formdata,
@@ -165,6 +180,7 @@ class Page extends React.Component{
         localStorage.setItem('logged', back.logged.islogged)
         localStorage.removeItem('data')
         localStorage.removeItem('expiry')
+        localStorage.removeItem('url')
         window.location.assign('/')
     })
     }
@@ -231,13 +247,6 @@ class Page extends React.Component{
             })
     }
 }
-    
-    handleEnter(event){
-        if(event.keyCode===13){
-            this.add()
-        }
-    }
-
 
     async componentDidMount(){
         console.log(new Date(localStorage.getItem('expiry')).toLocaleString())
@@ -247,6 +256,7 @@ class Page extends React.Component{
         console.log(localStorage.getItem('logged'))
         const url = `/note/all/${localStorage.getItem('data')}`
         console.log(url)
+        if(`${localStorage.getItem('url')}`==url){
         await fetch(url)
         .then((Response)=>Response.json())
         .then((back)=>{
@@ -258,6 +268,22 @@ class Page extends React.Component{
             console.log(back.data)
             }
         })
+    }
+    else{
+        await fetch(localStorage.getItem('url'))
+        .then((Response)=>Response.json())
+        .then((back)=>{
+        if(back.status)
+        {
+            this.setState({
+                 details: back.data
+            })
+            console.log(back.data)
+            }
+        })
+        localStorage.setItem('url', url)
+    }
+    
 
         const URL = `/api/user/${localStorage.getItem('data')}`
         console.log(URL)
@@ -310,20 +336,23 @@ class Page extends React.Component{
     render(){
         const {details} = this.state
         const {userdetails} = this.state
-        
+        let sidebar
+        let backdrop
+
+    if(this.state.sidebaropen){
+       sidebar = <Sidetoggle login={userdetails.email} signup="Logout" click={this.logout} searchbar={<Searchbar/>}/>
+       backdrop = <Backdropclose click={this.backdropclose} />
+    }
+
         return(
-            <div>
-                {/* <BackdropContext.Consumer> */}
-                
+            <div className='whole'>
                 <div className='add'>
-                <input type='text' placeholder='Add your note' onChange={this.setname} onKeyUp={this.handleEnter}></input>
+                    <Navbar login={userdetails.email} signup={<ExitToAppIcon/>} search={<Searchbar/>} drawer={this.opensidebar}/>
+                    {sidebar}
+                    {backdrop}
+                <textarea type='text' placeholder='Add your note' onChange={this.setname}></textarea>
                 <AddCircleOutlineIcon className='plus' onClick={this.add}></AddCircleOutlineIcon>
-                <div className='align'>
-                <div className='attr' onMouseEnter={()=>{document.querySelector('.logout').style.display='block'}} onMouseLeave={()=>{document.querySelector('.logout').style.display='none'}}>
-                <div className='username'>{userdetails.email}</div>
-                <div className='logout' onClick={this.logout} style={{display: 'none'}}>Logout</div>
-                </div>
-                </div>
+                
                 </div>
                 <div className='image-upload'>
                     <CancelIcon onClick={this.removefile} ref='filestore' style={{display: 'none'}} className='file-remove'></CancelIcon>
@@ -343,8 +372,8 @@ class Page extends React.Component{
                                     <div className='content-name'>
                                         {item.todoname}
                                     </div>
-                                    <div className='content' id={item._id} onClick={this.setid}>
-                                        <EdiText id={item._id} type='text' value={item.content} onSave={this.onsave}></EdiText>
+                                    <div className='content' id={item._id} onClick={this.setid} style={{whiteSpace: "pre-wrap"}}>
+                                        <EdiText id={item._id} type='textarea' value={item.content} onSave={this.onsave}></EdiText>
                                     </div>
                                     <div className='image-set' style={{display: 'none'}}>
                                     <input type='file' accept='image/*' className='upload' onChange={this.onselectfile} ref='InputField'></input>
@@ -373,6 +402,7 @@ class Page extends React.Component{
                         )
                     })}
                 </ul>
+                <div style={{height: '40px'}}></div>
             </div>
         )
     }

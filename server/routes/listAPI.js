@@ -219,6 +219,46 @@ router.get("/all/:userid", async (req, res) => {
 	}
 	try {
 		const getLists = await List.find({ userId: req.params.userid }).sort({'dot':-1})
+        var q=[]
+        if(req.query.month){
+            getLists.map((item)=>{
+                console.log(item.dot)
+                if(new RegExp(item.dot.toString().split(" ")[1]).test(req.query.month)){
+                    q.push(item)
+                    
+                }
+            })
+            return res.json({
+                status: true,
+                data: q
+            })
+        }
+        if(req.query.year){
+            getLists.map((item)=>{
+                if(new RegExp(req.query.year).test(item.dot.toString().split(" ")[3])){
+                    q.push(item)
+                    
+                }
+            })
+            return res.json({
+                status: true,
+                data: q
+            })
+        }
+        
+        if(req.query.content){
+            getLists.map((item)=>{
+                req.query.content.toLocaleLowerCase().split(" ").map((item_search)=>{
+                    if(new RegExp(item_search).test(item.content)){
+                        q.push(item)
+                    }
+                })
+            })
+            return res.json({
+                status: true,
+                data: q
+            })
+        }
 		return res.json({
 			status: true,
 			data: getLists,
@@ -227,7 +267,7 @@ router.get("/all/:userid", async (req, res) => {
 		return res.json({
 			status: false,
 			erorr: err.message,
-			errorOccured: errorOccured,
+			// errorOccured: errorOccured,
 			errorDetails: err,
 		})
 	}

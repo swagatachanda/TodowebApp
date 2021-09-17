@@ -5,11 +5,13 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import Navbar from '../Navbar/navbar';
 import Page from '../screens/Profile/profile';
-// import BellA from './components/images/mynote.jfif'
-// import Appform from './appform';
+import Profile from '../screens/Login/login'
+import Sidetoggle from '../Navbar/hamburger/hamburger';
+import Footer from '../screens/Footer/footer';
 
 class App extends React.Component{
-  
+
+
   render(){
     var router
     console.log(localStorage.getItem('logged'))
@@ -23,17 +25,22 @@ class App extends React.Component{
       localStorage.removeItem('logged')
       localStorage.removeItem('data')
       localStorage.removeItem('expiry')
-      return <Navbar/>
+      localStorage.removeItem('url')
+      return <Profile/>
     }
     else{
       return <Page/>
     }
     }
     router = skip()
+
+    
     
     return(
-      <div className='App_'>
-        <div className='App__Aside'>
+      // <div className='App_'>
+      <div style={{marginTop: '120px'}}>
+        <div className='App__Aside' style={{height: '100%'}}>
+          <Navbar/>
       <BrowserRouter>
       <Switch>
         <Route exact path='/'>
@@ -44,10 +51,9 @@ class App extends React.Component{
         </Route>
       </Switch>
       </BrowserRouter>
+      
       </div>
-      {/* <div className='App__Form'>
-          <h1>Welcome to My Note</h1>
-      </div> */}
+      <Footer/>
       </div>
     )
   }

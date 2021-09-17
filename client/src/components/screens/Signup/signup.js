@@ -5,6 +5,7 @@ import {mailformat} from './regex'
 
 
 
+
 class Signup extends React.Component{
 
     constructor(props) {
@@ -101,6 +102,7 @@ class Signup extends React.Component{
                     this.setState({
                         correctmsg: "Your account has been successfully created"
                     })
+                    window.location.assign("/")
                 }
                 else
                 {
@@ -117,6 +119,7 @@ class Signup extends React.Component{
     render(){
         return(
             <div className='content-container'>
+               
                 <div className='login-container'>
                     <div className='username'>
                         <div className='label'>
@@ -168,6 +171,11 @@ class Signup extends React.Component{
                         <div className='button login' onClick={this.signup}>
                             <div className='button-label'>
                                 Sign Up
+                            </div>
+                        </div>
+                        <div className='button login'>
+                            <div className='button-label'>
+                                <a href="/">Login to existing account</a>
                             </div>
                         </div>
                     </div>
