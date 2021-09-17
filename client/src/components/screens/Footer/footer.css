@@ -1,0 +1,17 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Patrick+Hand&display=swap');
+.footername{
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    background:#bdb2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 20px; */
+}
+.footername div{
+    font-size: 1.3rem;
+    font-family: 'Patrick Hand', cursive;
+}

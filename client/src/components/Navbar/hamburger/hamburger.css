@@ -1,0 +1,37 @@
+.sidedrawer{
+    height: 100vh;
+    background: white;
+    box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    max-width: 250px;
+    z-index: 200;
+}
+.sidedrawer ul{
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.sidedrawer li div{
+    color: #521751;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.sidedrawer li{
+    margin: 0.5rem 0;
+}
+
+.sidedrawer li div:hover{
+    color: #fa923f;
+}
+
+@media (min-width: 769px){
+    .sidedrawer{
+        display: none;
+    }
+}
