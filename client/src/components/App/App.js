@@ -6,7 +6,6 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Navbar from '../Navbar/navbar';
 import Page from '../screens/Profile/profile';
 import Profile from '../screens/Login/login'
-import Sidetoggle from '../Navbar/hamburger/hamburger';
 import Footer from '../screens/Footer/footer';
 
 class App extends React.Component{
