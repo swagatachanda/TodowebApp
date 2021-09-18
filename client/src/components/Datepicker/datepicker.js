@@ -25,7 +25,7 @@ class Datepicker extends Component{
     render(){
     return(
         <div>
-            <DatePicker selected={this.state.selecteddate} onChange={this.datevalue} dateFormat='dd/MM/yyyy' isClearable showYearDropdown scrollableMonthYearDropdown customInput={<CustomInput/>} placeholderText="Select a date"/>
+            <DatePicker selected={this.state.selecteddate} onChange={this.datevalue} dateFormat='dd/MM/yyyy' showYearDropdown scrollableMonthYearDropdown customInput={<CustomInput/>} placeholderText="Select a date"/>
             {/* ref='date' open={this.state.isopen} onClickOutside={()=>{this.setState({isopen: !this.state.isopen})}} */}
         </div>
     )
