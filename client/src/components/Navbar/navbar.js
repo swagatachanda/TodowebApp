@@ -49,7 +49,7 @@ class Navbar extends React.Component{
                 <div className='toolbar__items'>
                 <ul>
                   <li>
-                  <div className='username'>
+                  <div>
                         {this.props.search}
                       </div>
                   </li>

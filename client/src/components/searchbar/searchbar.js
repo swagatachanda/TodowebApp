@@ -1,5 +1,7 @@
 import React from 'react';
 import './searchbar.css';
+import SearchIcon from '@material-ui/icons/Search';
+import Datepicker from '../Datepicker/datepicker'
 
 
 class Searchbar extends React.Component{
@@ -14,7 +16,17 @@ class Searchbar extends React.Component{
         this.change = this.change.bind(this)
         this.valuechange = this.valuechange.bind(this)
         this.valuechange_year = this.valuechange_year.bind(this)
+        this.searchtext = this.searchtext.bind(this)
       };
+
+
+      searchtext(){
+        const URL=`/note/all/${localStorage.getItem('data')}?content=${this.refs.text.value}`
+        console.log(URL)
+        
+            localStorage.setItem('url', URL)
+            window.location.assign("/mypage")
+      }
 
       valuechange(e){
        
@@ -37,15 +49,31 @@ class Searchbar extends React.Component{
 
       change(e){
           console.log(e.currentTarget.value)
-          if(e.currentTarget.value=='month'){
+          if(e.currentTarget.value==='month'){
                 this.refs.monthly.style.display='block'
                 this.refs.yearly.style.display='none'
-          }
-          else if(e.currentTarget.value=='year'){
-            this.refs.yearly.style.display='block'
-            this.refs.monthly.style.display='none'
-      }
-        
+                this.refs.Input.style.display='none'
+                this.refs.date.style.display='none'
+            }
+            else if(e.currentTarget.value==='year'){
+                    this.refs.yearly.style.display='block'
+                    this.refs.monthly.style.display='none'
+                    this.refs.Input.style.display='none'
+                    this.refs.date.style.display='none'
+            }
+            else if(e.currentTarget.value==='content'){
+                this.refs.yearly.style.display='none'
+                    this.refs.monthly.style.display='none'
+                    this.refs.Input.style.display='block'
+                    this.refs.date.style.display='none'
+            }
+            else if(e.currentTarget.value==='date'){
+                this.refs.yearly.style.display='none'
+                this.refs.monthly.style.display='none'
+                this.refs.Input.style.display='none'
+                this.refs.date.style.display='block'
+                // console.log(localStorage.getItem('url'))
+            }
       }
     render(){
         return(
@@ -71,12 +99,21 @@ class Searchbar extends React.Component{
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 </select>
+                <div className='search' style={{display: 'none'}} ref='Input'>
+                <input type='text' placeholder='Enter some words' className='searchcontent' ref='text'></input>
+                <SearchIcon style={{paddingLeft: '10px'}} className='icon' onClick={this.searchtext}/>
+                </div>
+                <div style={{display: 'none'}} ref='date'>
+                <Datepicker ref='datepicker'/>
+                </div>
                 <select onChange={this.change}>
                 <option value="Search" style={{display:'none'}}>Search</option>
                 <option value="month">Search by Month</option>
                 <option value="year">Search by Year</option>
                 <option value="content">Search by Content</option>
+                <option value="date">Search by Date</option>
                 </select>
+                
             </div>
         )
     }

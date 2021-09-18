@@ -245,11 +245,25 @@ router.get("/all/:userid", async (req, res) => {
                 data: q
             })
         }
+        if(req.query.date){
+            getLists.map((item)=>{
+                if(req.query.date.split(" ")[1]==item.dot.toString().split(" ")[1] &&
+                req.query.date.split(" ")[2]==item.dot.toString().split(" ")[2] &&
+                req.query.date.split(" ")[3]==item.dot.toString().split(" ")[3]){
+                    q.push(item)
+                }
+                
+            })
+            return res.json({
+                status: true,
+                data: q
+            })
+        }
         
         if(req.query.content){
             getLists.map((item)=>{
-                req.query.content.toLocaleLowerCase().split(" ").map((item_search)=>{
-                    if(new RegExp(item_search).test(item.content)){
+                req.query.content.toLocaleLowerCase().split(" ").filter((i)=>{if((new RegExp(/^[a-z]$/)).test(i.toLocaleLowerCase())){return false}return true}).map((item_search)=>{
+                    if(new RegExp(item_search).test(item.content.toLocaleLowerCase())){
                         q.push(item)
                     }
                 })

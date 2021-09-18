@@ -1,9 +1,33 @@
 .Searchbar{
     display: flex;
+    min-height: 25px;
+    max-height: 30px;
 }
 select{
     margin-left: 25px;
 }
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.searchcontent{
+    height: 20px;
+    border: 2px solid black;
+    background: white;
+    color: black;
+    margin: 0;
+    width: 65%;
+    /* font-size: 1rem; */
+}
+.icon{
+    color: white;
+}
+.icon:hover{
+    color: #fa923f;
+    cursor: pointer;
+}
+
 @media (max-width: 769px){
     .Searchbar{
         flex-direction: column;
@@ -12,5 +36,8 @@ select{
     select{
         margin-bottom: 25px;
         height: 30px
+    }
+    .icon{
+        color: black;
     }
 }

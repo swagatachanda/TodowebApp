@@ -1,0 +1,35 @@
+import React, { Component } from 'react';
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import CustomInput from "./custominput"
+
+
+class Datepicker extends Component{
+    constructor(props) {
+        super(props)
+  
+        this.state={
+            selecteddate: null,
+        }
+        this.datevalue = this.datevalue.bind(this)
+      };
+
+      datevalue(date){
+        this.setState({selecteddate: date})
+        localStorage.setItem('url', `/note/all/${localStorage.getItem('data')}?date=${date}`)
+        window.location.assign("/mypage")
+      }
+
+    
+    
+    render(){
+    return(
+        <div>
+            <DatePicker selected={this.state.selecteddate} onChange={this.datevalue} dateFormat='dd/MM/yyyy' isClearable showYearDropdown scrollableMonthYearDropdown customInput={<CustomInput/>} placeholderText="Select a date"/>
+            {/* ref='date' open={this.state.isopen} onClickOutside={()=>{this.setState({isopen: !this.state.isopen})}} */}
+        </div>
+    )
+    }
+}
+
+export default Datepicker
