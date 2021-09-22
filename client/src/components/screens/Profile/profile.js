@@ -60,6 +60,13 @@ class Page extends React.Component{
       }
 
     triggerpopup(e){
+        if(this.state.image!=null){
+            const curr_id = e.currentTarget.id
+            this.refs[`ref_${e.currentTarget.id}`].style.display='block'
+            this.refs[`ref_${e.currentTarget.id}`].innerHTML = "Please upload your previous image to save changes or clear the previous file"
+            setTimeout(()=>{this.refs[`ref_${curr_id}`].style.display='none'},2000)
+            return
+        }
         this.refs.InputField.click()
         this.setState({
             id: e.currentTarget.id
@@ -68,10 +75,12 @@ class Page extends React.Component{
     }
 
 
-    removefile(){
-            this.refs.filestore.style.display = 'none'
-            this.refs.upload.style.display = 'none'
-            this.refs.icon.style.display = 'none'
+    removefile(e){
+        this.refs.InputField.value = null
+            this.refs[`${e.currentTarget.id}`].style.display = 'none'
+            this.setState({
+                image: null
+            })
     }
 
     async deleteobj(e){
@@ -150,15 +159,13 @@ class Page extends React.Component{
 
 
     onselectfile(event){
-        console.log(event.target.files[0])
+        console.log(event.target.files)
         this.setState({
             image: event.target.files[0]
         })
         
-        if(event.target.files && event.target.files.length > 0){
-            this.refs.icon.style.display = 'block'
-            this.refs.upload.style.display = 'block'
-            this.refs.filestore.style.display = 'block'
+        if((event.target.files && event.target.files.length > 0)){
+            this.refs[`${this.state.id}`].style.display = 'block'
             this.refs.filestore.style.cursor = 'pointer'
         }
     }
@@ -354,11 +361,6 @@ class Page extends React.Component{
                 <AddCircleOutlineIcon className='plus' onClick={this.add}></AddCircleOutlineIcon>
                 
                 </div>
-                <div className='image-upload'>
-                    <CancelIcon onClick={this.removefile} ref='filestore' style={{display: 'none'}} className='file-remove'></CancelIcon>
-                     <InsertPhotoIcon ref='icon' style={{display: 'none'}}></InsertPhotoIcon>
-                    <Button onClick={this.uploadpic} ref='upload' style={{display: 'none'}}>Upload</Button>
-                </div>
                 <ul>
                     {details.map((item)=>{
                         
@@ -372,6 +374,7 @@ class Page extends React.Component{
                                     <div className='content-name'>
                                         {item.todoname}
                                     </div>
+                                    <div style={{height: '20px'}}></div>
                                     <div className='content' id={item._id} onClick={this.setid} style={{whiteSpace: "pre-wrap"}}>
                                         <EdiText id={item._id} type='textarea' value={item.content} onSave={this.onsave}></EdiText>
                                     </div>
@@ -390,14 +393,21 @@ class Page extends React.Component{
                                         })}
                                         </div>
                                         <div className='addimage'>
-                                        <AddPhotoAlternateIcon onClick={this.triggerpopup}style={{cursor: 'pointer'}} id={item._id}></AddPhotoAlternateIcon>
+                                        <AddPhotoAlternateIcon onClick={this.triggerpopup} style={{cursor: 'pointer'}} id={item._id}></AddPhotoAlternateIcon>
                                         </div>
+                                    </div>
+                                    <div className='image-upload' ref={item._id} style={{display: 'none', marginTop: '20px'}}>
+                                        <CancelIcon onClick={this.removefile} ref='filestore' className='file-remove' id={item._id}></CancelIcon>
+                                        <InsertPhotoIcon style={{color: 'black'}}></InsertPhotoIcon>
+                                        <Button onClick={this.uploadpic}>Upload</Button>
                                     </div>
                                 </div>
                             </div>
+                            <div className="error" ref={`ref_${item._id}`} style={{display: 'none'}}></div>
                             <div className='modify'>
                             <DeleteIcon className='delete-item' id={item._id} onClick={this.deleteelem}></DeleteIcon>
                             </div>
+
                             </div>
                         )
                     })}
