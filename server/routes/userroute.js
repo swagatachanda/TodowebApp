@@ -2,7 +2,21 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
+const shortId = require("shortid")
+const nodemailer=require("nodemailer")
 router.use(express.json())
+require('dotenv').config()
+
+
+var transport = nodemailer.createTransport({
+    host : 'smtp.gmail.com',
+    port: 465,
+    secure : true,
+    auth: {
+       user: process.env.EMAIL,
+       pass: process.env.EMAIL_PASS
+    }
+})
 
 router.post('/new',async(req,res)=>{
     try {
@@ -136,6 +150,117 @@ router.get('/:userid', async(req,res)=>{
 		})
 	}
 })
+
+
+router.post('/forgetpassword', async(req,res)=>{
+    const mail=req.body.email
+    const code = shortId.generate()
+    var user={}
+    try{
+        user=await User.findOne({email : mail})
+        if(user===null)
+            return res.json({status : false, error : "User not found"})
+    }
+    catch(err)
+    {
+        return res.json({status : false, error : err.message, error: err})
+    }
+			try{
+				var hashedPass= await bcrypt.hash(code,10)
+			}
+			catch(err){
+				res.json({status : false, error : err, message : "Passcode not found"}) 
+			}
+			try{
+				const Updatepass= await User.updateOne({email:req.body.email}, {$set: {passcode:hashedPass}});
+				
+			
+			console.log(Updatepass)
+			// return res.json({
+			// 	status: true,
+			// 	data: Updatepass,
+			// })
+		
+		
+			}
+			catch(err){
+				console.log(err)
+			}
+    if(user!==null)
+    {
+        const message = {
+            from: process.env.EMAIL, 
+            to: user.email,         
+            subject: 'Reset password',
+            html : `<h2>Hello,</h2>
+                    <h3>Your code to reset your password : <span style="color :red;">${code}</span></h3>` 
+        }
+        transport.sendMail(message, function(err, info) {
+            if (err) {
+              console.log(err)
+            } else {
+              console.log(info);
+            }
+        })
+    }
+    res.json({status : true , message : 'code sent'})
+})
+
+
+router.post("/matchpass/@:emailid",async(req,res)=>{
+    if(req.body.passcode==="") {return res.json({status: false, error : "Please enter passcode"})}
+    const userdetails = await User.findOne({email:req.params.emailid})
+    console.log(userdetails)
+	
+    if (await bcrypt.compare(req.body.passcode, userdetails.passcode)) {
+        delete userdetails.passcode
+        res.json({status: true, data : userdetails})
+    }
+    else {
+		return res.json({
+			status: false,
+			error: "passcode not a match"
+		})
+    }
+})
+
+
+router.patch('/login/forgetpassword', async (req,res)=>{
+    try
+    {
+        try{
+            var hashedPass= await bcrypt.hash(req.body.password,10)
+        }
+        catch(err){
+            return res.json({status: false,
+				errorOccured: "password not hashed",
+				error: "password",}) 
+        }
+        // status.status=true
+        try{
+            const Updatepass= await User.updateOne({"_id":req.body.id}, {'$set' :{"password":hashedPass}});
+            // status.data=Updatepass;
+          
+        console.log(Updatepass)
+		return res.json({
+			status: true,
+			data: "Password updated",
+		})
+        }
+        catch(err){
+            return res.json({
+				status: false,
+				errorOccured: err.message,
+				error: err,
+			})
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+})
+
 
 
 module.exports = router

@@ -1,6 +1,8 @@
 import React from 'react';
 import './signup.css'
 import {mailformat} from './regex'
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 
 
@@ -17,7 +19,8 @@ class Signup extends React.Component{
           pass: false,
           msg: "",
           password: "",
-          correctmsg: ""
+          correctmsg: "",
+          visibility: false
       }
     
       this.change = this.change.bind(this)
@@ -25,8 +28,36 @@ class Signup extends React.Component{
       this.check = this.check.bind(this)
       this.signup = this.signup.bind(this)
       this.setname = this.setname.bind(this)
+      this.visibleon = this.visibleon.bind(this)
+      this.visibleoff = this.visibleoff.bind(this)
 
     };
+
+
+
+    visibleon(){
+        
+        if(!this.state.visibility){
+            this.refs.pass.type='text'
+            this.setState({
+              visibility: true
+          })
+        }
+        this.refs.showpassoff.style.display="block"
+      this.refs.showpasson.style.display="none"
+    }
+
+    visibleoff(){
+      
+      if(this.state.visibility){
+          this.refs.pass.type='password'
+          this.setState({
+            visibility: false
+        })
+      }
+      this.refs.showpassoff.style.display="none"
+    this.refs.showpasson.style.display="block"
+  }
 
     setname(name){
         this.setState({
@@ -144,8 +175,12 @@ class Signup extends React.Component{
                             Password
                         </div>
                         <div className='input-field'>
-                            <div className='whole-input'>
-                            <input type='password' className='input pass p1' required placeholder='' onChange={this.change}></input>
+                            <div className='whole-input' style={{display: 'flex'}}>
+                            <input type='password' ref='pass' className='input pass p1' required placeholder='' onChange={this.change}></input>
+                            <div className='show-icon' style={{display: 'flex', paddingTop: '12px'}}>
+                            <VisibilityOffIcon onClick={this.visibleon} ref='showpasson'/>
+                            <VisibilityIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
+                            </div>
                             </div>
                             <div className='border'></div>
                         </div>

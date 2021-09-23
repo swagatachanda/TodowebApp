@@ -17,8 +17,29 @@ input{
     font-size: 20px;
     margin-top: 15px;
 }
+.show-icon:hover{
+    color: salmon;
+    cursor: pointer;
+}
 .label{
     font-size: 25px;
     font-family: 'Raleway', sans-serif;
     color: rgb(45, 45, 240);
+}
+.button-login{
+    display: flex;
+    justify-content: space-around;
+}
+.label-pass{
+    background: burlywood;
+    padding: 9px;
+    color: rgb(15, 70, 15);
+}
+.label-pass:hover{
+    background: rgb(238, 190, 185);
+    color: black;
+}
+a{
+    text-decoration: none;
+   
 }

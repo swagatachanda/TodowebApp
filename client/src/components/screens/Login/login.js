@@ -1,9 +1,8 @@
 import React from 'react';
 import './login.css'
 import { mailformat } from '../Signup/regex';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import Page from '../Profile/profile';
-import Navbar from '../../Navbar/navbar';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 class Profile extends React.Component{
 
@@ -15,21 +14,77 @@ class Profile extends React.Component{
             pass: false,
             msg: "",
             password: "",
-            link:''
+            link:'',
+            visibility: false,
+            correctmsg: ""
         }
       
         this.validemail = this.validemail.bind(this)
         this.login = this.login.bind(this)
         this.change = this.change.bind(this)
-        this.signup = this.signup.bind(this)
-  
+        this.visibleon = this.visibleon.bind(this)
+        this.visibleoff = this.visibleoff.bind(this)
+        this.forgetpass = this.forgetpass.bind(this)
       };
+
+      async forgetpass(){
+        var data={
+            email : this.state.Email
+            }
+            if(data.email==='')
+            {
+                this.setState({
+                    msg: "Enter your email first"
+                })
+                setTimeout(()=>{this.refs.error.style.display='none'},2000)
+                return
+        }
+        localStorage.setItem("code", data.email)
+        const url=`/api/user/forgetpassword`
+        console.log(data,url)
+        await fetch(url,{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body : JSON.stringify(data)
+        })
+        .then((Response)=>Response.json())
+            .then(async(back)=>{
+                if(back.status){
+                    this.setState({
+                        correctmsg: "Code sent to mail"
+                    })
+                    window.location.assign("/forgetpass")
+                }
+            })
+      }
 
       
 
-      signup(){
-
+      visibleon(){
+        
+          if(!this.state.visibility){
+              this.refs.pass.type='text'
+              this.setState({
+                visibility: true
+            })
+          }
+          this.refs.showpassoff.style.display="block"
+        this.refs.showpasson.style.display="none"
       }
+
+      visibleoff(){
+        
+        if(this.state.visibility){
+            this.refs.pass.type='password'
+            this.setState({
+              visibility: false
+          })
+        }
+        this.refs.showpassoff.style.display="none"
+      this.refs.showpasson.style.display="block"
+    }
 
 
       validemail(email){
@@ -127,25 +182,39 @@ class Profile extends React.Component{
                             Password
                         </div>
                         <div className='input-field'>
-                            <div className='whole-input'>
-                            <input type='password' className='input pass p1' required placeholder='' onChange={this.change}></input>
+                            <div className='whole-input'  style={{display: 'flex'}}>
+                            <input type='password' ref='pass' className='input pass p1' required placeholder='' onChange={this.change}></input>
+                            <div className='show-icon' style={{display: 'flex', paddingTop: '12px'}}>
+                            <VisibilityOffIcon onClick={this.visibleon} ref='showpasson'/>
+                            <VisibilityIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
+                            </div>
                             </div>
                             <div className='border'></div>
                         </div>
                     </div>
                     <div className='button-container'>
-                        <div className='error-message' style={{color: 'red'}}>
+                        <div className='error-message' style={{color: 'red'}} ref='error'>
                             {this.state.msg}
+                        </div>
+                        <div className="correct=message" style={{color:"green"}}>
+                            {this.state.correctmsg}
                         </div>
                         <div className='button login' onClick={this.login}>
                             <div className='button-label'>
                                 Login
                             </div>
                         </div>
-                        <div className="button login" onClick={this.signup}>
+                        <div className="button login">
+                            <div>
                             <a href="/signup" className='button-label'>
                                 Create an Account
                             </a>
+                            </div>
+                            <div className="button-login">
+                            <div className='label-pass' onClick={this.forgetpass}>
+                                Forget Password?
+                            </div>
+                        </div>
                         </div>
                     </div>
                     </div>

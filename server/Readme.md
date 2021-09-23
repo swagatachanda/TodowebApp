@@ -22,3 +22,9 @@ post: note/upload/:listid - for uploading images
 
 delete: note/deletephoto/:name - for deleting images
 
+patch: api/user/login/forgetpassword - for changing password
+
+post: api/user/forgetpassword - for sending code in mail
+
+post: api/user/matchpass/@:emailid - for validating passcode
+

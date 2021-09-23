@@ -2,7 +2,6 @@
 import './App.css';
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
-
 import Navbar from '../Navbar/navbar';
 import Page from '../screens/Profile/profile';
 import Profile from '../screens/Login/login'
