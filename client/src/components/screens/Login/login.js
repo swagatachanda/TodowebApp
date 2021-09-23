@@ -29,7 +29,6 @@ class Profile extends React.Component{
       };
 
       async forgetpass(){
-          this.context.handleToggle()
         var data={
             email : this.state.Email
             }
@@ -41,6 +40,7 @@ class Profile extends React.Component{
                 setTimeout(()=>{this.refs.error.style.display='none'},2000)
                 return
         }
+        this.context.handleToggle()
         localStorage.setItem("code", data.email)
         const url=`/api/user/forgetpassword`
         console.log(data,url)
@@ -60,6 +60,7 @@ class Profile extends React.Component{
                     window.location.assign("/forgetpass")
                 }
                 else{
+                    this.context.handleClose()
                     this.setState({
                         msg: back.error
                     })
@@ -208,9 +209,9 @@ class Profile extends React.Component{
                         <div className="correct=message" style={{color:"green"}}>
                             {this.state.correctmsg}
                         </div>
-                        <div className='button login' onClick={this.login}>
+                        <div className='button login' onClick={this.forgetpass}>
                             <div className='button-label'>
-                                Login
+                                Forget Password?
                             </div>
                         </div>
                         <div className="button login">
@@ -220,8 +221,8 @@ class Profile extends React.Component{
                             </a>
                             </div>
                             <div className="button-login">
-                            <div className='label-pass' onClick={this.forgetpass}>
-                                Forget Password?
+                            <div className='label-pass' onClick={this.login}>
+                                Login
                             </div>
                         </div>
                         </div>

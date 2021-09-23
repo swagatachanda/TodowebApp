@@ -60,7 +60,7 @@ class Forgetpass extends React.Component{
         console.log(localStorage.getItem("code"))
         if(localStorage.getItem("code")==null){
             this.refs.err.style.display='block'
-            this.refs.err.innerHTML="Email cannot be found"
+            this.refs.err.innerHTML="Email cannot be found. Please go back to the login page to enter your email first."
             setTimeout(()=>{this.refs.err.style.display='none'},2000)
             return
         }
