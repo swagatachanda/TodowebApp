@@ -200,10 +200,11 @@ router.post('/forgetpassword', async(req,res)=>{
               console.log(err)
             } else {
               console.log(info);
+			  res.json({status : true , message : 'code sent'})
             }
         })
     }
-    res.json({status : true , message : 'code sent'})
+    
 })
 
 

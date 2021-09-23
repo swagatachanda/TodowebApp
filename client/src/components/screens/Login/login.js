@@ -57,6 +57,13 @@ class Profile extends React.Component{
                     })
                     window.location.assign("/forgetpass")
                 }
+                else{
+                    this.setState({
+                        msg: back.error
+                    })
+                    setTimeout(()=>{this.refs.error.style.display='none'},2000)
+                    return
+                }
             })
       }
 

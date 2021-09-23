@@ -132,6 +132,9 @@ class Forgetpass extends React.Component{
                 <div className="input-field">
                     <input type="text" class="input code" ref='passcodecheck' required placeholder="" onChange={this.setpass}></input>
                     <Button onClick={this.checkcode}>OK</Button>
+                    <div style={{color: 'black'}}>
+                    (If you dont recieve the code in your mail, please check your spambox)
+                </div>
                     <div className="border" ref="err" style={{color: 'red'}}></div>
                 </div>
             </div>
@@ -147,7 +150,7 @@ class Forgetpass extends React.Component{
                             <VisibilityIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
                         </div>
                     </div>
-                    <div className="border" ref='errmsg'></div>
+                    <div className="border" ref='errmsg' style={{color: 'green'}}></div>
                 </div>
             </div>
             <div className="button-container">
