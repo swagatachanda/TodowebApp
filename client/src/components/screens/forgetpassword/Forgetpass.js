@@ -150,7 +150,7 @@ class Forgetpass extends React.Component{
                             <VisibilityIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
                         </div>
                     </div>
-                    <div className="border" ref='errmsg' style={{color: 'green'}}></div>
+                    <div className="border" ref='errmsg'></div>
                 </div>
             </div>
             <div className="button-container">

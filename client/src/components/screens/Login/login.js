@@ -3,8 +3,9 @@ import './login.css'
 import { mailformat } from '../Signup/regex';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import { BackdropContext } from '../../screeneffect/backdrop/backdrop'
 class Profile extends React.Component{
+    static contextType = BackdropContext
 
     constructor(props) {
         super(props)
@@ -28,6 +29,7 @@ class Profile extends React.Component{
       };
 
       async forgetpass(){
+          this.context.handleToggle()
         var data={
             email : this.state.Email
             }
