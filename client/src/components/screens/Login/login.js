@@ -215,7 +215,7 @@ class Profile extends React.Component{
                             </div>
                         </div>
                         <div className="button login">
-                            <div>
+                            <div className='signup'>
                             <a href="/signup" className='button-label'>
                                 Create an Account
                             </a>

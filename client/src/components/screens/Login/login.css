@@ -2,10 +2,10 @@
     padding-top: 20px;
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 .login-container{
     width: 100%;
-
 }
 .login-container >  div{
     padding: 15px;
@@ -42,4 +42,59 @@ input{
 a{
     text-decoration: none;
    
+}
+@media (min-width: 1168px) {
+    .login-container{
+        padding-left: 385px;
+    }
+}
+@media (max-width: 1168px) {
+    .login-container{
+        padding-left: 300px;
+    }
+}
+@media (max-width: 954px) {
+    .login-container{
+        padding-left: 200px;
+    }
+}
+@media (max-width: 716px) {
+    .login-container{
+        padding-left: 0px;
+        width: 200%;
+        margin-bottom: 40px;
+    }
+    .username > div, .password > div, .button-container > div, .whole-input{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding-bottom: 10px;
+    }
+    /* .button-label{
+        padding-top: 20px;
+    } */
+    .button{
+        justify-content: space-between;
+    }
+    .label-pass{
+        margin-left: 50px;
+    }
+    .button-container{
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 20px;
+    }
+    .input{
+        width: 65%;
+    }
+    /* .pass{
+        width: 40%;
+    } */
+    .signup{
+        display: flex;
+        align-items: center;
+    }
+    .label{
+        padding-left: 0;
+    }
 }

@@ -19,8 +19,7 @@ class Signup extends React.Component{
           pass: false,
           msg: "",
           password: "",
-          correctmsg: "",
-          visibility: false
+          correctmsg: ""
       }
     
       this.change = this.change.bind(this)
@@ -30,34 +29,48 @@ class Signup extends React.Component{
       this.setname = this.setname.bind(this)
       this.visibleon = this.visibleon.bind(this)
       this.visibleoff = this.visibleoff.bind(this)
+      this.visibleconon = this.visibleconon.bind(this)
+      this.visibleconoff = this.visibleconoff.bind(this)
 
     };
 
 
 
     visibleon(){
-        
-        if(!this.state.visibility){
             this.refs.pass.type='text'
             this.setState({
               visibility: true
           })
-        }
         this.refs.showpassoff.style.display="block"
       this.refs.showpasson.style.display="none"
     }
 
     visibleoff(){
-      
-      if(this.state.visibility){
           this.refs.pass.type='password'
           this.setState({
             visibility: false
         })
-      }
       this.refs.showpassoff.style.display="none"
     this.refs.showpasson.style.display="block"
   }
+
+  visibleconon(){
+        this.refs.conpass.type='text'
+        this.setState({
+          visibility: true
+      })
+    this.refs.showconpassoff.style.display="block"
+  this.refs.showconpasson.style.display="none"
+}
+
+visibleconoff(){
+      this.refs.conpass.type='password'
+      this.setState({
+        visibility: false
+    })
+  this.refs.showconpassoff.style.display="none"
+this.refs.showconpasson.style.display="block"
+}
 
     setname(name){
         this.setState({
@@ -91,9 +104,11 @@ class Signup extends React.Component{
 
     check(term){
         if(term.target.value!==this.state.password){
+            this.refs.errormessage.style.display='flex'
             this.setState({
                 msg: "Password not a match"
             })
+            setTimeout(()=>{this.refs.errormessage.style.display='none'},2000)
         }
         else{
             this.setState({
@@ -106,15 +121,26 @@ class Signup extends React.Component{
 
     async signup(term) {
         if(!this.state.pass){
+            this.refs.errormessage.style.display='flex'
             this.setState({
                 msg: "Fill the details correctly"
             })
+            setTimeout(()=>{this.refs.errormessage.style.display='none'},2000)
             return
         }
         var data={
         name : this.state.Name,
         email : this.state.Email,
         password : this.state.password
+        }
+
+        if(data.name===null||data.email===null||data.password===null||this.refs.conpass.value==null||this.refs.conpass.value!=data.password){
+            this.refs.errormessage.style.display='flex'
+            this.setState({
+                msg: "Fill the details correctly"
+            })
+            setTimeout(()=>{this.refs.errormessage.style.display='none'},2000)
+            return
         }
         console.log(data)
         const URL = `/api/user/new`
@@ -137,9 +163,11 @@ class Signup extends React.Component{
                 }
                 else
                 {
+                    this.refs.errormessage.style.display='flex'
                     this.setState({
                         msg: back.error
                     })
+                    setTimeout(()=>{this.refs.errormessage.style.display='none'},2000)
                 }
             })
     }
@@ -190,14 +218,18 @@ class Signup extends React.Component{
                             Confirm Password
                         </div>
                         <div className='input-field'>
-                            <div className='whole-input'>
-                            <input type='password' className='input pass p2' required placeholder='' onChange={this.check}></input>
+                            <div className='whole-input'  style={{display: 'flex'}}>
+                            <input type='password' className='input pass p2' ref='conpass' required placeholder='' onChange={this.check}></input>
+                            <div className='show-icon' style={{display: 'flex', paddingTop: '12px'}}>
+                            <VisibilityOffIcon onClick={this.visibleconon} ref='showconpasson'/>
+                            <VisibilityIcon style={{display: 'none'}} ref='showconpassoff' onClick={this.visibleconoff}/>
+                            </div>
                             </div>
                             <div className='border'></div>
                         </div>
                     </div>
                     <div className='button-container'>
-                        <div className='error-message' style={{color: 'red'}}>
+                        <div className='error-message' ref='errormessage' style={{color: 'red'}}>
                             {this.state.msg}
                         </div>
                         <div className="correct=message" style={{color:"green"}}>

@@ -2,6 +2,7 @@ import React from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from '@material-ui/core/Button'
+import './forgetpassword.css'
 
 
 class Forgetpass extends React.Component{
@@ -82,7 +83,7 @@ class Forgetpass extends React.Component{
                         id_: back.data._id
                     })
                     this.refs.pass.style.display='block'
-                    this.refs.passbutton.style.display='block'
+                    this.refs.passbutton.style.display='flex'
                     localStorage.removeItem("code")
                 }
                 else{
@@ -130,12 +131,16 @@ class Forgetpass extends React.Component{
                 </div>
                 {/* <div ref="err"></div> */}
                 <div className="input-field">
+                    <div>
+                    <div className='codecheck'>
                     <input type="text" class="input code" ref='passcodecheck' required placeholder="" onChange={this.setpass}></input>
                     <Button onClick={this.checkcode}>OK</Button>
+                    </div>
                     <div style={{color: 'black'}}>
                     (If you dont recieve the code in your mail, please check your spambox)
                 </div>
                     <div className="border" ref="err" style={{color: 'red'}}></div>
+                </div>
                 </div>
             </div>
             <div className="password" style={{display: 'none'}} ref='pass'>
@@ -158,7 +163,7 @@ class Forgetpass extends React.Component{
 
                 </div>
                 <div className="button login" style={{display: 'none'}} ref='passbutton'>
-                    <Button onClick={this.updatepass}>
+                    <Button onClick={this.updatepass} >
                         Change
                     </Button>
                 </div>
