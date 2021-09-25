@@ -2,6 +2,7 @@ import React from 'react';
 import './searchbar.css';
 import SearchIcon from '@material-ui/icons/Search';
 import Datepicker from '../Datepicker/datepicker'
+import { display } from '@mui/system';
 
 
 class Searchbar extends React.Component{
@@ -64,20 +65,22 @@ class Searchbar extends React.Component{
             else if(e.currentTarget.value==='content'){
                 this.refs.yearly.style.display='none'
                     this.refs.monthly.style.display='none'
-                    this.refs.Input.style.display='block'
+                    this.refs.Input.style.display='flex'
                     this.refs.date.style.display='none'
             }
             else if(e.currentTarget.value==='date'){
                 this.refs.yearly.style.display='none'
                 this.refs.monthly.style.display='none'
                 this.refs.Input.style.display='none'
-                this.refs.date.style.display='block'
+                this.refs.date.style.display='flex'
                 // console.log(localStorage.getItem('url'))
             }
       }
     render(){
         return(
+
             <div className="Searchbar">
+                <div>
                 <select onChange={this.valuechange} style={{display:'none'}} onfocus='this.size=5;' onblur='this.size=1;' ref='monthly'>
                 <option value="Search" style={{display:'none'}}>Month</option>
                 <option value="Jan">January</option>
@@ -93,27 +96,33 @@ class Searchbar extends React.Component{
                 <option value="Nov">November</option>
                 <option value="Dec">December</option>
                 </select>
+                </div>
+                <div>
                 <select onChange={this.valuechange_year} style={{display:'none'}} onfocus='this.size=5;' onblur='this.size=1;' ref='yearly'>
                 <option value="Search" style={{display:'none'}}>Year</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 </select>
+                </div>
                 <div className='search' style={{display: 'none'}} ref='Input'>
-                <input type='text' placeholder='Enter some words' className='searchcontent' ref='text'></input>
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
+                <input type='text' placeholder='Enter some words' className='searchcontent' ref='text' style={{outline: 'none', border: 'none'}}></input>
                 <SearchIcon style={{paddingLeft: '10px'}} className='icon' onClick={this.searchtext}/>
                 </div>
-                <div style={{display: 'none'}} ref='date'>
+                </div>
+                <div style={{display: 'none', justifyContent: 'center'}} ref='date'>
                 <Datepicker ref='datepicker'/>
                 </div>
-                <select onChange={this.change}>
+                <div>
+                <select onChange={this.change} >
                 <option value="Search" style={{display:'none'}}>Search</option>
                 <option value="month">Search by Month</option>
                 <option value="year">Search by Year</option>
                 <option value="content">Search by Content</option>
                 <option value="date">Search by Date</option>
                 </select>
-                
+                </div>
             </div>
         )
     }

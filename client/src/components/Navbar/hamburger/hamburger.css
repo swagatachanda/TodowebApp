@@ -1,12 +1,12 @@
 .sidedrawer{
     height: 100vh;
-    background: white;
+    background: rgb(253, 237, 237);
     box-shadow: 1px 0px 7px rgba(0,0,0,0.3);
     position: fixed;
     top: 0;
     left: 0;
-    width: 70%;
-    max-width: 250px;
+    width: 100%;
+    max-width: 275px;
     z-index: 200;
 }
 .sidedrawer ul{
@@ -15,6 +15,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-left: 0;
+    /* padding-right: 15px; */
 }
 .sidedrawer li div{
     color: #521751;
@@ -30,7 +32,7 @@
     color: #fa923f;
 }
 
-@media (min-width: 769px){
+@media (min-width: 1072px){
     .sidedrawer{
         display: none;
     }

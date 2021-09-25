@@ -128,9 +128,11 @@ class Profile extends React.Component{
             console.log(data)
             if(data.email==='' || data.password==='')
             {
+                this.refs.error.style.display='flex'
                 this.setState({
                     msg: "Fill up the fields"
                 })
+                setTimeout(()=>{this.refs.error.style.display='none'},2000)
                 return
         }
         const url=`/api/user/login`
@@ -165,9 +167,11 @@ class Profile extends React.Component{
                 
                 else
                 {
+                    this.refs.error.style.display='flex'
                     this.setState({
                         msg: back.error
                     })
+                    setTimeout(()=>{this.refs.error.style.display='none'},2000)
                 }
             })
       }

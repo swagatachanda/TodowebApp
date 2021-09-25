@@ -116,3 +116,20 @@ img{
     color:rgb(226, 124, 124);
     cursor: pointer;
 }
+@media (max-width: 434px) {
+    .image-container{
+        flex-direction: column;
+    }
+    .list{
+        display: flex;
+        justify-content: center;
+    }
+    img{
+        margin: 2px;
+        margin-top: 20px;
+        width: 150px;
+    }
+    .addimage{
+        padding: 0;
+    }
+}

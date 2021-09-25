@@ -2,9 +2,11 @@
     display: flex;
     min-height: 25px;
     max-height: 30px;
+    justify-content: center;
 }
 select{
     margin-left: 25px;
+    height: 30px;
 }
 .search{
     display: flex;
@@ -18,7 +20,7 @@ select{
     color: black;
     margin: 0;
     width: 65%;
-    /* font-size: 1rem; */
+    font-size: 15px;
 }
 .icon{
     color: white;
@@ -28,7 +30,7 @@ select{
     cursor: pointer;
 }
 
-@media (max-width: 769px){
+@media (max-width: 1072px){
     .Searchbar{
         flex-direction: column;
         width: 156px;
@@ -39,5 +41,19 @@ select{
     }
     .icon{
         color: black;
+    }
+    .Searchbar > div{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        margin-top: 10px;
+    }
+    select{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .searchcontent{
+        width: 130px;
     }
 }

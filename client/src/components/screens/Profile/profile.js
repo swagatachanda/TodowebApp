@@ -382,11 +382,11 @@ class Page extends React.Component{
                                     <input type='file' accept='image/*' className='upload' onChange={this.onselectfile} ref='InputField'></input>
                                     </div>
                                     <div className='list'>
-                                        <div id={item._id} onClick={this.setid}>
+                                        <div id={item._id} onClick={this.setid} className="image-container" style={{display: 'flex', flexWrap: 'wrap'}}>
                                         {item.photoUrl.map((photos)=>{
                                             return(
                                                 <div>
-                                                <img src={photos} alt='avatar' style={{width:'85px', height:'85px'}}></img>
+                                                <img src={photos} alt='avatar' style={{maxWidth: '180px', maxHeight:'180px'}}></img>
                                                 <RemoveCircleOutlineIcon onClick={this.deleteobj} id={photos.split('/').slice(-1)[0]} style={{cursor: 'pointer'}}></RemoveCircleOutlineIcon>
                                                 </div>
                                             )
