@@ -134,7 +134,7 @@ this.refs.showconpasson.style.display="block"
         password : this.state.password
         }
 
-        if(data.name===null||data.email===null||data.password===null||this.refs.conpass.value==null||this.refs.conpass.value!=data.password){
+        if(data.name===null||data.email===null||data.password===null||this.refs.conpass.value==null||this.refs.conpass.value!==data.password){
             this.refs.errormessage.style.display='flex'
             this.setState({
                 msg: "Fill the details correctly"

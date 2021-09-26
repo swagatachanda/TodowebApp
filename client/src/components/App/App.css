@@ -1,6 +1,9 @@
 html, body, #root{
   height: 100%;
 }
+body{
+  background: #e9edc9;
+}
 *{
   -ms-overflow-style: none;
 }

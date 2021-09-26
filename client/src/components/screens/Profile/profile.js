@@ -263,7 +263,7 @@ class Page extends React.Component{
         console.log(localStorage.getItem('logged'))
         const url = `/note/all/${localStorage.getItem('data')}`
         console.log(url)
-        if(`${localStorage.getItem('url')}`==url){
+        if(`${localStorage.getItem('url')}`===url){
         await fetch(url)
         .then((Response)=>Response.json())
         .then((back)=>{
