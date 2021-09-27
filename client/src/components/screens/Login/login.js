@@ -43,7 +43,6 @@ class Profile extends React.Component{
         this.context.handleToggle()
         localStorage.setItem("code", data.email)
         const url=`/api/user/forgetpassword`
-        console.log(data,url)
         await fetch(url,{
             method:'POST',
             headers: {
@@ -125,7 +124,6 @@ class Profile extends React.Component{
             email : this.state.Email,
             password : this.state.password
             }
-            console.log(data)
             if(data.email==='' || data.password==='')
             {
                 this.refs.error.style.display='flex'
@@ -136,7 +134,6 @@ class Profile extends React.Component{
                 return
         }
         const url=`/api/user/login`
-        console.log(data,url)
         await fetch(url,{
             method:'POST',
             headers: {
@@ -199,8 +196,8 @@ class Profile extends React.Component{
                             <div className='whole-input'  style={{display: 'flex'}}>
                             <input type='password' ref='pass' className='input pass p1' required placeholder='' onChange={this.change}></input>
                             <div className='show-icon' style={{display: 'flex', paddingTop: '12px'}}>
-                            <VisibilityOffIcon onClick={this.visibleon} ref='showpasson'/>
-                            <VisibilityIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
+                            <VisibilityIcon onClick={this.visibleon} ref='showpasson'/>
+                            <VisibilityOffIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
                             </div>
                             </div>
                             <div className='border'></div>

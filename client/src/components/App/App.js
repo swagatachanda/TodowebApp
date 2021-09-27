@@ -12,7 +12,6 @@ class App extends React.Component{
 
   render(){
     var router
-    console.log(localStorage.getItem('logged'))
     const skip=()=>{
       if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
         localStorage.setItem('logged', false)

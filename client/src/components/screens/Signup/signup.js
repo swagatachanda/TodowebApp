@@ -142,7 +142,6 @@ this.refs.showconpasson.style.display="block"
             setTimeout(()=>{this.refs.errormessage.style.display='none'},2000)
             return
         }
-        console.log(data)
         const URL = `/api/user/new`
         await fetch(URL,{
             method: 'POST',
@@ -153,7 +152,6 @@ this.refs.showconpasson.style.display="block"
         })
         .then((Response)=>Response.json())
             .then((back)=>{
-                console.log(back)
                 if(back.status)
                 {
                     this.setState({
@@ -206,8 +204,8 @@ this.refs.showconpasson.style.display="block"
                             <div className='whole-input' style={{display: 'flex'}}>
                             <input type='password' ref='pass' className='input pass p1' required placeholder='' onChange={this.change}></input>
                             <div className='show-icon' style={{display: 'flex', paddingTop: '12px'}}>
-                            <VisibilityOffIcon onClick={this.visibleon} ref='showpasson'/>
-                            <VisibilityIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
+                            <VisibilityIcon onClick={this.visibleon} ref='showpasson'/>
+                            <VisibilityOffIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
                             </div>
                             </div>
                             <div className='border'></div>
@@ -221,8 +219,8 @@ this.refs.showconpasson.style.display="block"
                             <div className='whole-input'  style={{display: 'flex'}}>
                             <input type='password' className='input pass p2' ref='conpass' required placeholder='' onChange={this.check}></input>
                             <div className='show-icon' style={{display: 'flex', paddingTop: '12px'}}>
-                            <VisibilityOffIcon onClick={this.visibleconon} ref='showconpasson'/>
-                            <VisibilityIcon style={{display: 'none'}} ref='showconpassoff' onClick={this.visibleconoff}/>
+                            <VisibilityIcon onClick={this.visibleconon} ref='showconpasson'/>
+                            <VisibilityOffIcon style={{display: 'none'}} ref='showconpassoff' onClick={this.visibleconoff}/>
                             </div>
                             </div>
                             <div className='border'></div>

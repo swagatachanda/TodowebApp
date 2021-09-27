@@ -23,7 +23,6 @@ class Searchbar extends React.Component{
 
       searchtext(){
         const URL=`/note/all/${localStorage.getItem('data')}?content=${this.refs.text.value}`
-        console.log(URL)
         
             localStorage.setItem('url', URL)
             window.location.assign("/mypage")
@@ -32,7 +31,6 @@ class Searchbar extends React.Component{
       valuechange(e){
        
         const URL=`/note/all/${localStorage.getItem('data')}?month=${e.currentTarget.value}`
-        console.log(URL)
         
             localStorage.setItem('url', URL)
             window.location.assign("/mypage")
@@ -41,7 +39,6 @@ class Searchbar extends React.Component{
         valuechange_year(e){
             
             const URL=`/note/all/${localStorage.getItem('data')}?year=${e.currentTarget.value}`
-            console.log(URL)
             
                 localStorage.setItem('url', URL)
                 window.location.assign("/mypage")
@@ -49,7 +46,6 @@ class Searchbar extends React.Component{
         }
 
       change(e){
-          console.log(e.currentTarget.value)
           if(e.currentTarget.value==='month'){
                 this.refs.monthly.style.display='block'
                 this.refs.yearly.style.display='none'
@@ -81,7 +77,7 @@ class Searchbar extends React.Component{
 
             <div className="Searchbar">
                 <div>
-                <select onChange={this.valuechange} style={{display:'none'}} onfocus='this.size=5;' onblur='this.size=1;' ref='monthly'>
+                <select onChange={this.valuechange} style={{display:'none'}} ref='monthly'>
                 <option value="Search" style={{display:'none'}}>Month</option>
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
@@ -98,7 +94,7 @@ class Searchbar extends React.Component{
                 </select>
                 </div>
                 <div>
-                <select onChange={this.valuechange_year} style={{display:'none'}} onfocus='this.size=5;' onblur='this.size=1;' ref='yearly'>
+                <select onChange={this.valuechange_year} style={{display:'none'}} ref='yearly'>
                 <option value="Search" style={{display:'none'}}>Year</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>

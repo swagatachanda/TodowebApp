@@ -14,10 +14,9 @@ app.use(express.json())
 app.use(cors())
 
 
-app.get('/',(req,res)=>{
-    // console.log(process.env.DB_CONNECTION)
-    res.send('Hello world')
-})
+// app.get('/',(req,res)=>{
+//     res.send('Hello world')
+// })
 
 
 app.enable("trust proxy")

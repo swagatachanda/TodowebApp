@@ -71,7 +71,6 @@ class Page extends React.Component{
         this.setState({
             id: e.currentTarget.id
         })
-        console.log(e.currentTarget.id)
     }
 
 
@@ -90,7 +89,6 @@ class Page extends React.Component{
           else{
             this.context.handleToggle()
             const url = `/note/deletephoto/${e.currentTarget.id}`
-            console.log(url)
             await fetch(url,{
                 method: 'DELETE',
                 headers:{
@@ -127,7 +125,6 @@ class Page extends React.Component{
         try {
             this.context.handleToggle()
             const url = `/note/update/${this.state.id}`
-            console.log(url)
             var data={
                 edit: 'Last updated on'
             }
@@ -147,7 +144,6 @@ class Page extends React.Component{
             })
             .then((Response)=>Response.json())
             .then((back)=>{
-                console.log(back)
                 window.location.assign('/mypage')
             })
     }
@@ -159,7 +155,6 @@ class Page extends React.Component{
 
 
     onselectfile(event){
-        console.log(event.target.files)
         this.setState({
             image: event.target.files[0]
         })
@@ -171,11 +166,9 @@ class Page extends React.Component{
     }
 
     setid(e){
-        console.log(e.currentTarget.id)
         this.setState({
             id: e.currentTarget.id
         })
-        console.log(this.state.id)
     }
 
     logout(){
@@ -183,7 +176,6 @@ class Page extends React.Component{
         fetch(url)
         .then((Response)=>Response.json())
         .then((back)=>{
-        console.log(back)
         localStorage.setItem('logged', back.logged.islogged)
         localStorage.removeItem('data')
         localStorage.removeItem('expiry')
@@ -205,7 +197,6 @@ class Page extends React.Component{
           else{
             this.context.handleToggle()
         const url = `/note/delete/${e.currentTarget.id}`
-        console.log(url)
         await fetch(url,{
             method:'DELETE',
             headers: {
@@ -213,7 +204,6 @@ class Page extends React.Component{
             }
         }).then((Response)=>Response.json())
         .then((data)=>{
-            console.log(data)
             if(data.data==='deleted')
             {
                 window.location.assign('/mypage')
@@ -235,9 +225,7 @@ class Page extends React.Component{
             content :  this.state.addelement,
             edit : 'Created on'
         }
-        console.log(data)
         const url = `/note/new`
-        console.log(url)
         await fetch(url,{
             method: 'POST',
             headers: {
@@ -247,7 +235,6 @@ class Page extends React.Component{
         })
         .then((Response)=>Response.json())
             .then((back)=>{
-                console.log(back)
                 if(back.status){
                     window.location.assign('/mypage')
                 }
@@ -256,13 +243,7 @@ class Page extends React.Component{
 }
 
     async componentDidMount(){
-        console.log(new Date(localStorage.getItem('expiry')).toLocaleString())
-        console.log(new Date(Date.now()).toLocaleString())
-        
-        
-        console.log(localStorage.getItem('logged'))
         const url = `/note/all/${localStorage.getItem('data')}`
-        console.log(url)
         if(`${localStorage.getItem('url')}`===url){
         await fetch(url)
         .then((Response)=>Response.json())
@@ -272,7 +253,6 @@ class Page extends React.Component{
             this.setState({
                  details: back.data
             })
-            console.log(back.data)
             }
         })
     }
@@ -285,7 +265,6 @@ class Page extends React.Component{
             this.setState({
                  details: back.data
             })
-            console.log(back.data)
             }
         })
         localStorage.setItem('url', url)
@@ -293,7 +272,6 @@ class Page extends React.Component{
     
 
         const URL = `/api/user/${localStorage.getItem('data')}`
-        console.log(URL)
         await fetch(URL)
         .then((Response)=>Response.json())
         .then((back)=>{
@@ -314,14 +292,11 @@ class Page extends React.Component{
           }
           else{
             this.context.handleToggle()
-        console.log(this.state.id)
         const url = `/note/update/${this.state.id}`
-        console.log(url)
         var data={
             content :  val,
             edit: 'Last updated on'
         }
-        console.log(data)
         await fetch(url,{
             method:'PATCH',
             headers: {
@@ -330,7 +305,6 @@ class Page extends React.Component{
             body: JSON.stringify(data)
         }).then((Response)=>Response.json())
         .then((data)=>{
-            console.log(data)
             
             window.location.assign('/mypage')
             

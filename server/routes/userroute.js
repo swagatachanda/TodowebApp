@@ -88,7 +88,6 @@ router.post("/login", async (req, res) => {
 	}
 	try {
 		var findUser = await User.findOne({ email: req.body.email })
-		console.log({ user: findUser })
 		if (findUser === null) {
 			return res.json({
 				status: false,
@@ -108,7 +107,6 @@ router.post("/login", async (req, res) => {
 		delete findUser.password
 		req.session.islogged = true
 		req.session.userDetails = findUser
-		console.log(req.session)
 		return res.json({ status: true, loggedSuccess: true, data: findUser, logged: req.session })
 	} else {
 		return res.json({
@@ -121,7 +119,6 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res) => {
 	delete req.session.userDetails
 	req.session.islogged = false
-	console.log(req.session)
 	res.json({ status: true, loggedOut: true, logged: req.session })
 })
 
@@ -173,15 +170,6 @@ router.post('/forgetpassword', async(req,res)=>{
 			}
 			try{
 				const Updatepass= await User.updateOne({email:req.body.email}, {$set: {passcode:hashedPass}});
-				
-			
-			console.log(Updatepass)
-			// return res.json({
-			// 	status: true,
-			// 	data: Updatepass,
-			// })
-		
-		
 			}
 			catch(err){
 				console.log(err)
@@ -199,7 +187,6 @@ router.post('/forgetpassword', async(req,res)=>{
             if (err) {
               console.log(err)
             } else {
-              console.log(info);
 			  res.json({status : true , message : 'code sent'})
             }
         })
@@ -211,7 +198,6 @@ router.post('/forgetpassword', async(req,res)=>{
 router.post("/matchpass/@:emailid",async(req,res)=>{
     if(req.body.passcode==="") {return res.json({status: false, error : "Please enter passcode"})}
     const userdetails = await User.findOne({email:req.params.emailid})
-    console.log(userdetails)
 	
     if (await bcrypt.compare(req.body.passcode, userdetails.passcode)) {
         delete userdetails.passcode
@@ -241,8 +227,6 @@ router.patch('/login/forgetpassword', async (req,res)=>{
         try{
             const Updatepass= await User.updateOne({"_id":req.body.id}, {'$set' :{"password":hashedPass}});
             // status.data=Updatepass;
-          
-        console.log(Updatepass)
 		return res.json({
 			status: true,
 			data: "Password updated",

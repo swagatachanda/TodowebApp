@@ -28,7 +28,6 @@ class Forgetpass extends React.Component{
             id: this.state.id_,
             password :  this.refs.newpass.value
         }
-        console.log(data)
         await fetch(url,{
             method:'PATCH',
             headers: {
@@ -37,7 +36,6 @@ class Forgetpass extends React.Component{
             body: JSON.stringify(data)
         }).then((Response)=>Response.json())
         .then((data)=>{
-            console.log(data)
             this.refs.errmsg.innerHTML=data.data
             
             window.location.assign('/mypage')
@@ -57,8 +55,6 @@ class Forgetpass extends React.Component{
 
 
     async checkcode(){
-        console.log(this.state.passcode)
-        console.log(localStorage.getItem("code"))
         if(localStorage.getItem("code")==null){
             this.refs.err.style.display='block'
             this.refs.err.innerHTML="Email cannot be found. Please go back to the login page to enter your email first."

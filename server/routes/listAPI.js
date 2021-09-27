@@ -27,7 +27,6 @@ const upload = multer({storage}).single("image") //'image' parameter should be s
 router.post("/upload/:listid", upload, (req,res)=>{
     const filename = req.file.originalname.split(".")
     const filetype = filename[filename.length-1]
-    console.log(req.file)
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: `${uuidv4()}.${filetype}`,
@@ -40,7 +39,6 @@ router.post("/upload/:listid", upload, (req,res)=>{
         }
         try {
             const searchList = await List.findById(req.params.listid)
-            console.log(searchList)
             if (searchList === null) {
                 return res.status(404).json({
                     error: 'List not found',
@@ -52,7 +50,6 @@ router.post("/upload/:listid", upload, (req,res)=>{
                 { _id: req.params.listid },
                 { $set: searchList }
             )
-            console.log(updateList)
             res.status(200).send(data)
         } catch (err) {
             return res.status(500).json({
@@ -123,7 +120,6 @@ router.post("/new", async (req, res) => {
 		}
 	}
     data[validFields[3]] = new Date()
-	console.log(data)
 	var newlist = new List()
     for (item in data){
         newlist[item] = data[item]
@@ -222,7 +218,6 @@ router.get("/all/:userid", async (req, res) => {
         var q=[]
         if(req.query.month){
             getLists.map((item)=>{
-                console.log(item.dot)
                 if(new RegExp(item.dot.toString().split(" ")[1]).test(req.query.month)){
                     q.push(item)
                     

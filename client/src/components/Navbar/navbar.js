@@ -25,7 +25,6 @@ class Navbar extends React.Component{
       fetch(url)
       .then((Response)=>Response.json())
       .then((back)=>{
-      console.log(back)
       localStorage.setItem('logged', back.logged.islogged)
       localStorage.removeItem('data')
       localStorage.removeItem('expiry')
