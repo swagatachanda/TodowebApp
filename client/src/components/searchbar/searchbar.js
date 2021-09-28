@@ -2,7 +2,6 @@ import React from 'react';
 import './searchbar.css';
 import SearchIcon from '@material-ui/icons/Search';
 import Datepicker from '../Datepicker/datepicker'
-import { display } from '@mui/system';
 
 
 class Searchbar extends React.Component{

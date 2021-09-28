@@ -1,7 +1,6 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Signup from '../screens/Signup/signup';
-import Profile from '../screens/Login/login';
 import MenuIcon from '@material-ui/icons/Menu';
 import Forgetpass from '../screens/forgetpassword/Forgetpass'
 

@@ -138,7 +138,7 @@ class Page extends React.Component{
 
             const formdata = new FormData();
             formdata.append("image", this.state.image);
-            const res = await fetch(`/note/upload/${this.state.id}`, {
+            await fetch(`/note/upload/${this.state.id}`, {
               method: "POST",
               body: formdata,
             })
