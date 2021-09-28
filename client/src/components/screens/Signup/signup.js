@@ -128,6 +128,14 @@ this.refs.showconpasson.style.display="block"
             setTimeout(()=>{this.refs.errormessage.style.display='none'},2000)
             return
         }
+        if(this.state.password.length<4||this.state.password.length>8){
+            this.refs.errormessage.style.display='flex'
+            this.setState({
+                msg: "Password length must be greater than 4 and less than 8"
+            })
+            setTimeout(()=>{this.refs.errormessage.style.display='none'},2000)
+            return
+    }
         var data={
         name : this.state.Name,
         email : this.state.Email,

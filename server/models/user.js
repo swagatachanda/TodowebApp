@@ -19,6 +19,7 @@ const user = mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
+		// match: /^.{4,8}$/
 	},
 	passcode:{
 		type: String

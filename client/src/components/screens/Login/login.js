@@ -145,8 +145,6 @@ class Profile extends React.Component{
             .then(async(back)=>{
                 if(back.status)
                 {
-                    console.log(back.logged.cookie.expires)
-       
                     localStorage.setItem('data',back.data._id)
                     localStorage.setItem('logged', back.logged.islogged)
                     localStorage.setItem('expiry', back.logged.cookie.expires)
