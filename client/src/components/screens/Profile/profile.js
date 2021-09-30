@@ -314,6 +314,22 @@ class Page extends React.Component{
 }
 
     async componentDidMount(){
+
+
+        const URL = `/api/user/${localStorage.getItem('data')}`
+        await fetch(URL)
+        .then((Response)=>Response.json())
+        .then((back)=>{
+        if(back.status)
+        {
+            this.setState({
+                 userdetails: back.data
+            })
+            }
+            document.title=`${back.data.name}`
+        })
+
+
         const url = `/note/all/${localStorage.getItem('data')}`
         if(`${localStorage.getItem('url')}`===url){
         await fetch(url)
@@ -378,17 +394,7 @@ class Page extends React.Component{
     }
     
 
-        const URL = `/api/user/${localStorage.getItem('data')}`
-        await fetch(URL)
-        .then((Response)=>Response.json())
-        .then((back)=>{
-        if(back.status)
-        {
-            this.setState({
-                 userdetails: back.data
-            })
-            }
-        })
+        
 
    
     }

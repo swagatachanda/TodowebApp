@@ -101,6 +101,9 @@ this.refs.showconpasson.style.display="block"
         })
         
     }
+    componentDidMount(){
+        document.title='MyNotes/Signup'
+    }
 
     check(term){
         if(term.target.value!==this.state.password){

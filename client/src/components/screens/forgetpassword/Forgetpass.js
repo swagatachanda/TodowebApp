@@ -53,6 +53,10 @@ class Forgetpass extends React.Component{
         
     }
 
+    componentDidMount(){
+        document.title='MyNotes/Forgetpassword'
+    }
+
 
     async checkcode(){
         if(localStorage.getItem("code")==null){
