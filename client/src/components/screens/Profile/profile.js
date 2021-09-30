@@ -315,7 +315,6 @@ class Page extends React.Component{
 
     async componentDidMount(){
 
-
         const URL = `/api/user/${localStorage.getItem('data')}`
         await fetch(URL)
         .then((Response)=>Response.json())
@@ -391,12 +390,7 @@ class Page extends React.Component{
             }
         })
         localStorage.setItem('url', url)
-    }
-    
-
-        
-
-   
+    }   
     }
 
     async onsave(val){
