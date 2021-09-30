@@ -70,6 +70,13 @@ class Searchbar extends React.Component{
                 this.refs.date.style.display='flex'
                 // console.log(localStorage.getItem('url'))
             }
+            else if(e.currentTarget.value==="fav"){
+                const URL=`/note`
+            
+                localStorage.setItem('url', URL)
+                window.location.assign("/mypage")
+
+            }
       }
     render(){
         return(
@@ -116,6 +123,7 @@ class Searchbar extends React.Component{
                 <option value="year">Search by Year</option>
                 <option value="content">Search by Content</option>
                 <option value="date">Search by Date</option>
+                <option value="fav">Favourites</option>
                 </select>
                 </div>
             </div>

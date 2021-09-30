@@ -20,6 +20,11 @@ const todolist = mongoose.Schema({
     },
     photoUrl:{
         type: [mongoose.SchemaTypes.Url]
+    },
+    isLiked:{
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 module.exports = mongoose.model("todolist", todolist)

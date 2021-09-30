@@ -15,6 +15,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Sidetoggle from '../../Navbar/hamburger/hamburger'
 import Backdropclose from '../../screeneffect/backdrop/backdropclose';
 import Searchbar from '../../searchbar/searchbar'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 class Page extends React.Component{
@@ -29,7 +31,8 @@ class Page extends React.Component{
           id:'',
           userdetails: {},
           image: null,
-          sidebaropen: false
+          sidebaropen: false,
+          visible: false
       }
     
       this.add=this.add.bind(this)
@@ -45,7 +48,75 @@ class Page extends React.Component{
       this.removefile = this.removefile.bind(this)
       this.opensidebar = this.opensidebar.bind(this)
       this.backdropclose = this.backdropclose.bind(this)
+      this.isLiked = this.isLiked.bind(this)
+      this.notLiked = this.notLiked.bind(this)
     };
+
+
+
+    async isLiked(e){
+        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+            window.location.assign('/')
+          }
+          else{
+        this.setState({
+            visible: true
+        })
+        const curr_id = e.currentTarget.id
+        this.refs[`unliked_${e.currentTarget.id}`].style.display = 'block'
+        this.refs[`liked_${e.currentTarget.id}`].style.display = 'none'
+        const url = `/note/update/${e.currentTarget.id}`
+        var data={
+            isLiked: true
+        }
+        await fetch(url,{
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        }).then((Response)=>Response.json())
+        .then((data)=>{
+            this.refs[`ref_${curr_id}`].style.color='green'
+            this.refs[`ref_${curr_id}`].style.display='block'
+            this.refs[`ref_${curr_id}`].innerHTML = "Successfully added to favourites"
+            setTimeout(()=>{this.refs[`ref_${curr_id}`].style.display='none'},2000)
+            return
+        })
+    }
+    }
+
+    async notLiked(e){
+        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+            window.location.assign('/')
+          }
+          else{
+        this.setState({
+            visible: false
+        })
+        const curr_id = e.currentTarget.id
+        this.refs[`liked_${e.currentTarget.id}`].style.display = 'block'
+        this.refs[`unliked_${e.currentTarget.id}`].style.display = 'none'
+        const url = `/note/update/${e.currentTarget.id}`
+        var data={
+            isLiked: false
+        }
+        await fetch(url,{
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        }).then((Response)=>Response.json())
+        .then((data)=>{
+            this.refs[`ref_${curr_id}`].style.color='green'
+            this.refs[`ref_${curr_id}`].style.display='block'
+            this.refs[`ref_${curr_id}`].innerHTML = "Successfully removed from favourites"
+            setTimeout(()=>{this.refs[`ref_${curr_id}`].style.display='none'},2000)
+            return 
+        })
+    }
+    }
 
     backdropclose(){
         this.setState({
@@ -253,8 +324,37 @@ class Page extends React.Component{
             this.setState({
                  details: back.data
             })
+            back.data.map((item)=>{
+                if(item.isLiked){
+                    this.refs[`unliked_${item._id}`].style.display = 'block'
+                    this.refs[`liked_${item._id}`].style.display = 'none'
+                }
+            })
             }
         })
+    }
+    else if(localStorage.getItem('url')==='/note'){
+        await fetch(url)
+        .then((Response)=>Response.json())
+        .then((back)=>{
+        if(back.status)
+        {
+            var list=[]
+            back.data.map((items)=>{
+                if(items.isLiked){
+                    list.push(items)
+                }
+            })
+            this.setState({
+                 details: list
+            })
+            list.map((item)=>{
+                    this.refs[`unliked_${item._id}`].style.display = 'block'
+                    this.refs[`liked_${item._id}`].style.display = 'none'
+            })
+            }
+        })
+        localStorage.setItem('url', url)
     }
     else{
         await fetch(localStorage.getItem('url'))
@@ -265,6 +365,13 @@ class Page extends React.Component{
             this.setState({
                  details: back.data
             })
+            back.data.map((item)=>{
+                if(item.isLiked){
+                    this.refs[`unliked_${item._id}`].style.display = 'block'
+                    this.refs[`liked_${item._id}`].style.display = 'none'
+                }
+            })
+           
             }
         })
         localStorage.setItem('url', url)
@@ -370,10 +477,17 @@ class Page extends React.Component{
                                         <AddPhotoAlternateIcon onClick={this.triggerpopup} style={{cursor: 'pointer'}} id={item._id}></AddPhotoAlternateIcon>
                                         </div>
                                     </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', paddingRight:'20px'}}>
+                                        <div></div>
                                     <div className='image-upload' ref={item._id} style={{display: 'none', marginTop: '20px'}}>
                                         <CancelIcon onClick={this.removefile} ref='filestore' className='file-remove' id={item._id}></CancelIcon>
                                         <InsertPhotoIcon style={{color: 'black'}}></InsertPhotoIcon>
                                         <Button onClick={this.uploadpic}>Upload</Button>
+                                    </div>
+                                    <div >
+                                        <FavoriteBorderIcon style={{cursor: 'pointer', color: 'red'}} onClick={this.isLiked} ref={`liked_${item._id}`} id={item._id}/>
+                                        <FavoriteIcon style={{display: 'none', cursor: 'pointer', color: 'red'}} ref={`unliked_${item._id}`} onClick={this.notLiked} id={item._id}/>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

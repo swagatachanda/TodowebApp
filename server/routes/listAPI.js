@@ -144,7 +144,7 @@ router.post("/new", async (req, res) => {
 
 
 router.patch('/update/:listid',async(req,res)=>{
-    const data = {}
+    data = {}
     const validFields = [
         'todoname',
         'content',
@@ -156,7 +156,13 @@ router.patch('/update/:listid',async(req,res)=>{
             data[`${item}`] = req.body[`${item}`]
         }
     }
+    
     data[validFields[2]] = new Date()
+
+    if(req.body.isLiked===true||req.body.isLiked===false){
+        data={}
+        data.isLiked = req.body.isLiked
+    }
     try {
         const searchList = await List.findById(req.params.listid)
         if (searchList === null) {
