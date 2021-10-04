@@ -6,5 +6,4 @@ npm run dev -> now you can view at http://localhost:5500
 
 
 
-Branch - main : for developer 
-Branch - production : for production
+production: https://myn0tes.letspotify.me
