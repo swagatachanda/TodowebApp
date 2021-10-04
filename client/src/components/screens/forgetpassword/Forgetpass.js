@@ -29,6 +29,7 @@ class Forgetpass extends React.Component{
             password :  this.refs.newpass.value
         }
         if(data.password.length<4||data.password.length>8){
+            this.refs.errmsg.style.color = 'red'
             this.refs.errmsg.style.display='flex'
             this.setState({
                 msg: "Password length must be greater than 4 and less than 8"
@@ -44,6 +45,8 @@ class Forgetpass extends React.Component{
             body: JSON.stringify(data)
         }).then((Response)=>Response.json())
         .then((data)=>{
+            this.refs.errmsg.style.color = 'green'
+            this.refs.errmsg.style.display='flex'
             this.refs.errmsg.innerHTML=data.data
             
             window.location.assign('/mypage')
