@@ -49,7 +49,7 @@ class Forgetpass extends React.Component{
             this.refs.errmsg.style.display='flex'
             this.refs.errmsg.innerHTML=data.data
             
-            window.location.assign('/mypage')
+            window.location.assign('/')
             
            
         })
