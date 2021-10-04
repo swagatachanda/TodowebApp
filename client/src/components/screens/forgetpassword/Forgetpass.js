@@ -28,6 +28,14 @@ class Forgetpass extends React.Component{
             id: this.state.id_,
             password :  this.refs.newpass.value
         }
+        if(data.password.length<4||data.password.length>8){
+            this.refs.errmsg.style.display='flex'
+            this.setState({
+                msg: "Password length must be greater than 4 and less than 8"
+            })
+            setTimeout(()=>{this.refs.errmsg.style.display='none'},2000)
+            return
+    }
         await fetch(url,{
             method:'PATCH',
             headers: {
@@ -133,7 +141,7 @@ class Forgetpass extends React.Component{
                 <div className="input-field">
                     <div>
                     <div className='codecheck'>
-                    <input type="text" class="input code" ref='passcodecheck' required placeholder="" onChange={this.setpass}></input>
+                    <input type="text" className="input code" ref='passcodecheck' required placeholder="" onChange={this.setpass}></input>
                     <Button onClick={this.checkcode}>OK</Button>
                     </div>
                     <div style={{color: 'black'}}>
@@ -155,7 +163,7 @@ class Forgetpass extends React.Component{
                             <VisibilityOffIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
                         </div>
                     </div>
-                    <div className="border" ref='errmsg'></div>
+                    <div className="border" ref='errmsg' style={{color: 'red'}}>{this.state.msg}</div>
                 </div>
             </div>
             <div className="button-container">
