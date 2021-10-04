@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "client": "cd ../client && npm install && npm start",
+    "install-client": "cd ../client && npm install",
+    "build": "cd ../client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "author": "",
   "license": "ISC",

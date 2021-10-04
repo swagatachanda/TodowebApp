@@ -151,8 +151,8 @@ class Forgetpass extends React.Component{
                     <div className="whole-input"  style={{display: 'flex'}}>
                         <input type="password" ref='newpass' className="input pass" required placeholder=""></input>
                         <div className='show-icon' style={{display: 'flex', paddingTop: '12px'}}>
-                            <VisibilityOffIcon onClick={this.visibleon} ref='showpasson'/>
-                            <VisibilityIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
+                            <VisibilityIcon onClick={this.visibleon} ref='showpasson'/>
+                            <VisibilityOffIcon style={{display: 'none'}} ref='showpassoff' onClick={this.visibleoff}/>
                         </div>
                     </div>
                     <div className="border" ref='errmsg'></div>

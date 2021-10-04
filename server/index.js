@@ -4,6 +4,7 @@ const cors = require('cors')
 const sessions = require("express-session")
 const MongoStore = require("connect-mongo")
 const ListAPI = require('./routes/listAPI')
+const path = require("path")
 
 
 const api = require('./routes/apiroutes')
@@ -43,6 +44,15 @@ app.use(
 
 app.use('/api',api)
 app.use('/note',ListAPI)
+
+
+if(process.env.NODE_ENV==='production'){
+	app.use(express.static(path.join(__dirname,"../client/build")))
+		// res.sendFile(path.join(__dirname,'../client/build', 'index.html'))
+		app.get("/*",(req,res)=>{
+			res.sendFile('index.html', {root: path.join(__dirname, '../client/build')})
+		})
+}
 
 
 

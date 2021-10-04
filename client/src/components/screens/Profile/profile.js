@@ -55,7 +55,7 @@ class Page extends React.Component{
 
 
     async isLiked(e){
-        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+        if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
             window.location.assign('/')
           }
           else{
@@ -87,7 +87,7 @@ class Page extends React.Component{
     }
 
     async notLiked(e){
-        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+        if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
             window.location.assign('/')
           }
           else{
@@ -154,7 +154,7 @@ class Page extends React.Component{
     }
 
     async deleteobj(e){
-        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+        if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
             window.location.assign('/')
           }
           else{
@@ -189,7 +189,7 @@ class Page extends React.Component{
 
 
     async uploadpic(e){
-        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+        if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
             window.location.assign('/')
           }
           else{
@@ -262,7 +262,7 @@ class Page extends React.Component{
     }
 
     async deleteelem(e){
-        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+        if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
             window.location.assign('/')
           }
           else{
@@ -285,7 +285,7 @@ class Page extends React.Component{
     }
 
     async add(){
-        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+        if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
             window.location.assign('/')
           }
           else{
@@ -394,7 +394,7 @@ class Page extends React.Component{
     }
 
     async onsave(val){
-        if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+        if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
             window.location.assign('/')
           }
           else{

@@ -13,10 +13,11 @@ class App extends React.Component{
   render(){
     var router
     const skip=()=>{
-      if(new Date(Date.now()).toLocaleString()>=new Date(localStorage.getItem('expiry')).toLocaleString()){
+      if(new Date(Date.now())>=new Date(localStorage.getItem('expiry'))){
         localStorage.setItem('logged', false)
         localStorage.removeItem('data')
       }
+     
     
     if(localStorage.getItem('data')==null||!localStorage.getItem('logged')){
       localStorage.removeItem('logged')
