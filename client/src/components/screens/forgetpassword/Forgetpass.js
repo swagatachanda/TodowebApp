@@ -35,7 +35,7 @@ class Forgetpass extends React.Component{
             })
             setTimeout(()=>{this.refs.errmsg.style.display='none'},2000)
             return
-    }
+        }
         await fetch(url,{
             method:'PATCH',
             headers: {
