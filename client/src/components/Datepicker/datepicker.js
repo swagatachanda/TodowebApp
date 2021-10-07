@@ -15,8 +15,8 @@ class Datepicker extends Component{
       };
 
       datevalue(date){
-        this.setState({selecteddate: date})
-        localStorage.setItem('url', `/note/all/${localStorage.getItem('data')}?date=${date}`)
+        this.setState({selecteddate: new Date(date)})
+        localStorage.setItem('url', `/note/all/${localStorage.getItem('data')}?date=${new Date(date)}`)
         window.location.assign("/mypage")
       }
 
