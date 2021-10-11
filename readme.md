@@ -6,4 +6,4 @@ npm run dev -> now you can view at http://localhost:5500
 
 
 
-production: https://myn0tes.letspotify.me
+production: https://myn0tes.smll.live
