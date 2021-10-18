@@ -1,70 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Fredoka+One&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Fredoka+One&display=swap');
-
-.toolbar{
-    width: 100%;
-    position: fixed;
-    background-color: #521751;
-    height: 80px;
-    top: 0;
-    left: 0;
+.toolbar {
+  width: 100%;
+  position: fixed;
+  background-color: #521751;
+  height: 80px;
+  top: 0;
+  left: 0;
 }
-.toolbar__logo a{
-    font-family: 'Fredoka One', cursive;
-    color: white;
-    font-size: 2rem;
+.toolbar__logo a {
+  font-family: "Fredoka One", cursive;
+  color: white;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+.toolbar__logo {
+  margin-left: 1rem;
+}
+
+.toolbar__navigation {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+}
+.username {
+  color: white;
+}
+.toolbar__items ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.username:hover {
+  color: #fa923f;
+}
+.toolbar__items li {
+  padding: 0 0.5rem;
+}
+.spacer {
+  flex: 1;
+}
+.icon {
+  padding-left: 5px;
+}
+.toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 1072px) {
+  .toolbar__items {
+    display: none;
+  }
+  .toolbar__logo a {
+    font-size: 1.6rem;
     text-decoration: none;
-}
+  }
 
-.toolbar__logo{
-    margin-left: 1rem;
-}
-
-.toolbar__navigation{
-    display: flex;
-    align-items: center;
-    height: 100%;
-    padding: 0 1rem;
-}
-.username{
-    color: white;
-}
-.toolbar__items ul{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-.username:hover{
-    color: #fa923f;
-}
-.toolbar__items li{
-    padding: 0 0.5rem;
-    
-}
-.spacer{
-    flex: 1;
-}
-.icon{
-    padding-left: 5px;
-}
-.toggle{
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: white;
-}
-
-@media (max-width: 1072px){
-    .toolbar__items{
-        display: none;
-    }
-    .toolbar__logo a{
-        font-size: 1.6rem;
-        text-decoration: none;
-    }
-    
-    .toolbar__logo{
-        margin-left: 0.7rem;
-    }
+  .toolbar__logo {
+    margin-left: 0.7rem;
+  }
 }

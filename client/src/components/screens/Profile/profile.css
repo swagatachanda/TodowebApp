@@ -1,135 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
-#all-details{
-    padding: 7px 0 30px 7px;
-    display: flex;
-flex-direction: column;
+@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+#all-details {
+  padding: 7px 0 30px 7px;
+  display: flex;
+  flex-direction: column;
 
-padding-bottom: 30px;
+  padding-bottom: 30px;
 
-width: 70%;
-height: 40%
-}
-
-
-.name{
-   
-background-color: rgb(224, 218, 218);
-box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-width: 83%;
-border-radius: 10px;
-color: brown;
-font-size: 18px;
-font-family: 'Raleway',sans-serif;
-padding: 20px;
-}
-.add{
-    display: flex;
-    justify-content: center;
-}
-.styles-module_Editext__view_container__3oSYx > div{
-    width: 83%;
-    word-wrap: break-word;
-}
-input{
-    border: transparent;
-    outline: none;
-    background: transparent;
-    border-bottom: 2px solid black;
-}
-textarea{
-    border: transparent;
-    outline: none;
-    background: transparent;
-    border-bottom: 2px solid black;
-    width: 50%;
-    height: 40%;
-    font-size: 1.6rem;
-}
-.plus{
-
-    margin-top: 20px;
-    font-size: 17px;
-    color: black;
-    font-weight: bolder;
-    padding-left: 10px;
-}
-.plus:hover{
-    cursor: pointer;
-}
-.details{
-    display: flex;
-    /* margin-bottom: 60px; */
+  width: 70%;
+  height: 40%;
 }
 
-.modify > div{
-    /* padding-left: 20px; */
-    padding-top: 50px;
-    font-size: 30px;
-    color: black;
-    font-weight: bolder;
+.name {
+  background-color: rgb(224, 218, 218);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  width: 83%;
+  border-radius: 10px;
+  color: brown;
+  font-size: 18px;
+  font-family: "Raleway", sans-serif;
+  padding: 20px;
 }
-.delete-item{
-    padding-top: 70px;
-    padding-right: 20px;
-    padding-left: 20px;
+.add {
+  display: flex;
+  justify-content: center;
 }
-.delete-item:hover{
-    cursor: pointer;
+.styles-module_Editext__view_container__3oSYx > div {
+  width: 83%;
+  word-wrap: break-word;
 }
-.logout:hover{
-    cursor: pointer;
+input {
+  border: transparent;
+  outline: none;
+  background: transparent;
+  border-bottom: 2px solid black;
 }
-.logout{
-    padding-left: 50px;
-    padding-top: 20px;
-    text-align: center;
+textarea {
+  border: transparent;
+  outline: none;
+  background: transparent;
+  border-bottom: 2px solid black;
+  width: 50%;
+  height: 40%;
+  font-size: 1.6rem;
 }
-.attr{
-    
-    margin-top: 10px;
-    margin-left: 20px;
+.plus {
+  margin-top: 20px;
+  font-size: 17px;
+  color: black;
+  font-weight: bolder;
+  padding-left: 10px;
 }
-.username{
-    font-family: 'Balsamiq Sans', cursive;
+.plus:hover {
+  cursor: pointer;
 }
-.username:hover{
-    cursor: pointer;
+.details {
+  display: flex;
+  /* margin-bottom: 60px; */
 }
-.list{
-    display: flex;
+
+.modify > div {
+  /* padding-left: 20px; */
+  padding-top: 50px;
+  font-size: 30px;
+  color: black;
+  font-weight: bolder;
 }
-.addimage{
-    padding-left: 30px
+.delete-item {
+  padding-top: 70px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
-.error{
-    font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-size: 1.5rem;
-    width: 70%;
-    color: red;
+.delete-item:hover {
+  cursor: pointer;
 }
-img{
-    padding-left: 20px;
-    padding-top: 20px
+.logout:hover {
+  cursor: pointer;
 }
-.file-remove:hover{
-    color:rgb(226, 124, 124);
-    cursor: pointer;
+.logout {
+  padding-left: 50px;
+  padding-top: 20px;
+  text-align: center;
+}
+.attr {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.username {
+  font-family: "Balsamiq Sans", cursive;
+}
+.username:hover {
+  cursor: pointer;
+}
+.list {
+  display: flex;
+}
+.addimage {
+  padding-left: 30px;
+}
+.error {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 1.5rem;
+  width: 70%;
+  color: red;
+}
+img {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+.file-remove:hover {
+  color: rgb(226, 124, 124);
+  cursor: pointer;
 }
 @media (max-width: 434px) {
-    .image-container{
-        flex-direction: column;
-    }
-    .list{
-        display: flex;
-        justify-content: center;
-    }
-    img{
-        margin: 2px;
-        margin-top: 20px;
-        width: 150px;
-    }
-    .addimage{
-        padding: 0;
-    }
+  .image-container {
+    flex-direction: column;
+  }
+  .list {
+    display: flex;
+    justify-content: center;
+  }
+  img {
+    margin: 2px;
+    margin-top: 20px;
+    width: 150px;
+  }
+  .addimage {
+    padding: 0;
+  }
 }

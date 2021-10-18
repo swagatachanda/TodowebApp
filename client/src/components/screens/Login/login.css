@@ -1,100 +1,102 @@
-.content-container{
-    padding-top: 20px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.content-container {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
-.login-container{
-    width: 100%;
+.login-container {
+  width: 100%;
 }
-.login-container >  div{
-    padding: 15px;
+.login-container > div {
+  padding: 15px;
 }
-input{
-    /* border-radius: 5px; */
-    height: 30px;
-    width: 50%;
-    font-size: 20px;
-    margin-top: 15px;
+input {
+  /* border-radius: 5px; */
+  height: 30px;
+  width: 50%;
+  font-size: 20px;
+  margin-top: 15px;
 }
-.show-icon:hover{
-    color: salmon;
-    cursor: pointer;
+.show-icon:hover {
+  color: salmon;
+  cursor: pointer;
 }
-.label{
-    font-size: 25px;
-    font-family: 'Raleway', sans-serif;
-    color: rgb(45, 45, 240);
+.label {
+  font-size: 25px;
+  font-family: "Raleway", sans-serif;
+  color: rgb(45, 45, 240);
 }
-.button-login{
-    display: flex;
-    justify-content: space-around;
+.button-login {
+  display: flex;
+  justify-content: space-around;
 }
-.label-pass{
-    background: burlywood;
-    padding: 9px;
-    color: rgb(15, 70, 15);
+.label-pass {
+  background: burlywood;
+  padding: 9px;
+  color: rgb(15, 70, 15);
 }
-.label-pass:hover{
-    background: rgb(238, 190, 185);
-    color: black;
+.label-pass:hover {
+  background: rgb(238, 190, 185);
+  color: black;
 }
-a{
-    text-decoration: none;
-   
+a {
+  text-decoration: none;
 }
 @media (min-width: 1168px) {
-    .login-container{
-        padding-left: 385px;
-    }
+  .login-container {
+    padding-left: 385px;
+  }
 }
 @media (max-width: 1168px) {
-    .login-container{
-        padding-left: 300px;
-    }
+  .login-container {
+    padding-left: 300px;
+  }
 }
 @media (max-width: 954px) {
-    .login-container{
-        padding-left: 200px;
-    }
+  .login-container {
+    padding-left: 200px;
+  }
 }
 @media (max-width: 716px) {
-    .login-container{
-        padding-left: 0px;
-        width: 200%;
-        margin-bottom: 40px;
-    }
-    .username > div, .password > div, .button-container > div, .whole-input{
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        padding-bottom: 10px;
-    }
-    /* .button-label{
+  .login-container {
+    padding-left: 0px;
+    width: 200%;
+    margin-bottom: 40px;
+  }
+  .username > div,
+  .password > div,
+  .button-container > div,
+  .whole-input {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+  /* .button-label{
         padding-top: 20px;
     } */
-    .button{
-        justify-content: space-between;
-    }
-    .label-pass{
-        margin-left: 50px;
-    }
-    .button-container{
-        display: flex;
-        flex-direction: column-reverse;
-        margin-top: 20px;
-    }
-    .input{
-        width: 65%;
-    }
-    /* .pass{
+  .button {
+    justify-content: space-between;
+  }
+  .label-pass {
+    margin-left: 50px;
+  }
+  .button-container {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 20px;
+  }
+  .input {
+    width: 65%;
+  }
+  /* .pass{
         width: 40%;
     } */
-    .signup{
-        display: flex;
-        align-items: center;
-    }
-    .label{
-        padding-left: 0;
-    }
+  .signup {
+    display: flex;
+    align-items: center;
+  }
+  .label {
+    padding-left: 0;
+  }
 }
